@@ -77,7 +77,7 @@
                 <i class="fa-solid fa-arrows-rotate"></i>
                 <span>Tabelas de Substituição</span>
             </button>
-            <!-- NOVO BOTÃO SOLICITADO -->
+            <!-- BOTÃO LANCHES RÁPIDOS & PROTEICOS -->
             <button onclick="switchTab('gist-snacks')" id="btn-gist-snacks" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white">
                 <i class="fa-solid fa-bolt text-teal-400"></i>
                 <span>Lanches Rápidos & Proteicos</span>
@@ -100,7 +100,7 @@
                 </div>
                 <h2 class="text-3xl font-bold tracking-tight text-white">Bem-vindo ao NutriPlan Pro</h2>
                 <p class="text-slate-400 text-sm leading-relaxed">
-                    Selecione uma das categorias no menu acima para abrir os cardápios, conferir as Dicas Canetinha, visualizar os Lanches Rápidos atualizados via Gist ou consultar as Tabelas de Substituição.
+                    Selecione uma das categorias no menu acima para abrir os cardápios, conferir as Dicas Canetinha, visualizar os Lanches Rápidos atualizados do Gist ou consultar as Tabelas de Substituição.
                 </p>
             </div>
         </section>
@@ -459,14 +459,14 @@
             </div>
         </section>
 
-        <!-- TAB 5: LANCHES RÁPIDOS DINÂMICOS (VIA GIST) -->
+        <!-- TAB 5: LANCHES RÁPIDOS DINÂMICOS (VIA GIST COM PROXY CORS) -->
         <section id="tab-gist-snacks" class="tab-content space-y-6 hidden">
             <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-gradient-to-r from-slate-900 to-slate-900/60 p-6 rounded-2xl border border-slate-800">
                 <div>
                     <h2 class="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
-                        <i class="fa-solid fa-bolt text-teal-400"></i> Lanches Rápidos & Proteicos (Atualizado Automaticamente)
+                        <i class="fa-solid fa-bolt text-teal-400"></i> Lanches Rápidos & Proteicos
                     </h2>
-                    <p class="text-slate-400 text-sm mt-1">Carregado em tempo real direto do repositório remoto.</p>
+                    <p class="text-slate-400 text-sm mt-1">Carregado dinamicamente do Gist remoto.</p>
                 </div>
                 <div class="flex items-center gap-2">
                     <button onclick="loadGistSnacks()" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-medium transition-all flex items-center gap-1.5">
@@ -660,7 +660,7 @@
             });
         }
 
-        // Função para buscar e renderizar os dados do Gist automaticamente
+        // Função otimizada com proxy CORS seguro para carregar e atualizar o Gist automaticamente
         async function loadGistSnacks() {
             const container = document.getElementById('gist-grid');
             container.innerHTML = `
@@ -671,18 +671,21 @@
             `;
 
             try {
-                const response = await fetch('https://gist.githubusercontent.com/simuladordosecerta/babacd8fa898b6680f9059e3ab5d5461/raw/Lanches%2520R%25C3%25A1pidos.txt');
-                if (!response.ok) throw new Error('Erro ao carregar o Gist');
-                const text = await response.text();
+                // Usando o serviço allorigins como proxy CORS para contornar o bloqueio do navegador
+                const targetUrl = 'https://gist.githubusercontent.com/simuladordosecerta/babacd8fa898b6680f9059e3ab5d5461/raw/Lanches%2520R%25C3%25A1pidos.txt';
+                const response = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`);
+                if (!response.ok) throw new Error('Erro na conexão');
+                
+                const data = await response.json();
+                const text = data.contents;
 
-                // Processamento simples do texto bruto do Gist em itens estruturados
-                // (Divide por blocos de linhas ou quebras duplas)
+                // Processamento inteligente do texto em blocos/cartões
                 const lines = text.split('\n').map(l => l.trim()).filter(l => l.length > 0);
                 const parsedItems = [];
                 let currentItem = { id: 1, title: "Lanche Rápido", ingredients: [], prep: null, tag: "Lanche Rápido" };
 
-                lines.forEach((line, index) => {
-                    if (line.toLowerCase().startsWith('opção') || line.startsWith('#') || (line.length < 50 && !line.includes('-') && !line.includes('g') && index > 0 && parsedItems.length < lines.length / 3)) {
+                lines.forEach((line) => {
+                    if (line.toLowerCase().startsWith('opção') || line.startsWith('#')) {
                         if (currentItem.ingredients.length > 0) {
                             parsedItems.push(currentItem);
                             currentItem = { id: parsedItems.length + 1, title: line, ingredients: [], prep: null, tag: "Lanche Rápido" };
@@ -692,27 +695,24 @@
                     } else if (line.toLowerCase().includes('preparo') || line.toLowerCase().includes('modo:')) {
                         currentItem.prep = line;
                     } else {
-                        currentItem.ingredients.substitutions ? null : currentItem.ingredients.push(line.replace(/^[•\-\*]\s*/, ''));
+                        currentItem.ingredients.push(line.replace(/^[•\-\*]\s*/, ''));
                     }
                 });
                 if (currentItem.ingredients.length > 0) {
                     parsedItems.push(currentItem);
                 }
 
-                // Se o formato do texto for livre, caso prefira exibir como blocos genéricos limpos caso o parsing automático varie:
                 if (parsedItems.length === 0) {
-                    // Fallback se o texto vier em outro formato: exibe blocos por linhas
                     container.innerHTML = `<div class="col-span-full bg-slate-900 border border-slate-800 rounded-2xl p-6 text-slate-300 whitespace-pre-line text-sm">${text}</div>`;
                 } else {
                     renderCards(parsedItems, 'gist-grid');
                 }
             } catch (error) {
-                // Caso ocorra bloqueio de CORS direto do Gist via fetch simples no browser, exibe o conteúdo via iframe ou mensagem amigável de fallback
                 container.innerHTML = `
                     <div class="col-span-full bg-slate-900 border border-slate-800 rounded-2xl p-6 text-center space-y-3">
-                        <p class="text-amber-400 font-semibold text-sm"><i class="fa-solid fa-triangle-exclamation"></i> Nota de Carregamento Direto</p>
-                        <p class="text-slate-300 text-xs">O navegador bloqueou o acesso direto (CORS) ao Gist por políticas de segurança. Para ver o conteúdo atualizado diretamente, acesse o link abaixo ou utilize um proxy CORS:</p>
-                        <a href="https://gist.githubusercontent.com/simuladordosecerta/babacd8fa898b6680f9059e3ab5d5461/raw/Lanches%2520R%25C3%25A1pidos.txt" target="_blank" class="inline-block px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-semibold transition-all">Abrir Gist Original Externamente</a>
+                        <p class="text-amber-400 font-semibold text-sm"><i class="fa-solid fa-triangle-exclamation"></i> Aviso de Conexão</p>
+                        <p class="text-slate-300 text-xs">Não foi possível carregar o conteúdo automaticamente via navegador devido a políticas de segurança de rede. Você pode conferir o arquivo bruto diretamente no link abaixo:</p>
+                        <a href="https://gist.githubusercontent.com/simuladordosecerta/babacd8fa898b6680f9059e3ab5d5461/raw/Lanches%2520R%25C3%25A1pidos.txt" target="_blank" class="inline-block px-4 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-semibold transition-all">Abrir Gist Externamente</a>
                     </div>
                 `;
             }
