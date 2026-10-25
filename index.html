@@ -1,0 +1,641 @@
+<!-- Top Header / Dashboard Navbar -->
+<header class="sticky top-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+        <div class="flex items-center space-x-3">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center shadow-lg shadow-emerald-900/30">
+                <i class="fa-solid fa-utensils text-white text-lg"></i>
+            </div>
+            <div>
+                <h1 class="font-bold text-lg tracking-tight bg-gradient-to-r from-emerald-400 to-teal-200 bg-clip-text text-transparent">NutriPlan Pro</h1>
+                <p class="text-xs text-slate-400">Cardápio Inteligente & Substituições</p>
+            </div>
+        </div>
+
+        <!-- Status -->
+        <div class="flex items-center space-x-3">
+            <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 mr-2 animate-pulse"></span>
+                Ativo & Atualizado
+            </span>
+        </div>
+    </div>
+</header>
+
+<!-- Main Navigation Tabs -->
+<nav class="bg-slate-900/50 border-b border-slate-800 sticky top-16 z-40 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex space-x-2 sm:space-x-4 overflow-x-auto py-3 no-scrollbar">
+        <button onclick="switchTab('breakfast')" id="btn-breakfast" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white">
+            <i class="fa-solid fa-mug-hot"></i>
+            <span>Café & Lanche (36)</span>
+        </button>
+        <button onclick="switchTab('lunch')" id="btn-lunch" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white">
+            <i class="fa-solid fa-bowl-food"></i>
+            <span>Almoço & Jantar (17)</span>
+        </button>
+        <button onclick="switchTab('fast-snacks')" id="btn-fast-snacks" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white">
+            <i class="fa-solid fa-pen-nib text-amber-400"></i>
+            <span>Dicas Canetinha</span>
+        </button>
+        <button onclick="switchTab('substitutions')" id="btn-substitutions" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white">
+            <i class="fa-solid fa-arrows-rotate"></i>
+            <span>Tabelas de Substituição</span>
+        </button>
+        <button onclick="switchTab('home')" id="btn-home" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all flex items-center space-x-2 whitespace-nowrap bg-emerald-600 text-white shadow-lg shadow-emerald-900/40">
+            <i class="fa-solid fa-house"></i>
+            <span>Início</span>
+        </button>
+    </div>
+</nav>
+
+<!-- Main Content Container -->
+<main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+    <!-- TELA INICIAL / BOAS-VINDAS -->
+    <section id="tab-home" class="tab-content space-y-6 text-center py-16">
+        <div class="max-w-2xl mx-auto space-y-4 bg-slate-900 border border-slate-800 p-8 rounded-3xl shadow-2xl">
+            <div class="w-16 h-16 bg-emerald-500/10 text-emerald-400 rounded-2xl flex items-center justify-center mx-auto text-2xl border border-emerald-500/20">
+                <i class="fa-solid fa-utensils"></i>
+            </div>
+            <h2 class="text-3xl font-bold tracking-tight text-white">Bem-vindo ao NutriPlan Pro</h2>
+            <p class="text-slate-400 text-sm leading-relaxed">
+                Selecione uma das categorias no menu acima para abrir os cardápios de Café & Lanche, Almoço & Jantar, conferir as Dicas Canetinha ou consultar as Tabelas de Substituição.
+            </p>
+        </div>
+    </section>
+
+    <!-- TAB 1: CAFÉ DA MANHÃ E LANCHE DA TARDE -->
+    <section id="tab-breakfast" class="tab-content space-y-6 hidden">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-gradient-to-r from-slate-900 to-slate-900/60 p-6 rounded-2xl border border-slate-800">
+            <div>
+                <h2 class="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+                    <i class="fa-solid fa-sun text-amber-400"></i> Café da Manhã e Lanche da Tarde
+                </h2>
+                <p class="text-slate-400 text-sm mt-1">36 opções versáteis que podem ser utilizadas tanto no café da manhã quanto no lanche da tarde.</p>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="px-3 py-1 rounded-lg bg-slate-800 text-xs font-medium text-slate-300 border border-slate-700">Páginas 3 a 12</span>
+            </div>
+        </div>
+
+        <div id="breakfast-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </section>
+
+    <!-- TAB 2: ALMOÇO E JANTAR -->
+    <section id="tab-lunch" class="tab-content space-y-6 hidden">
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-gradient-to-r from-slate-900 to-slate-900/60 p-6 rounded-2xl border border-slate-800">
+            <div>
+                <h2 class="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+                    <i class="fa-solid fa-moon text-indigo-400"></i> Almoço e Jantar
+                </h2>
+                <p class="text-slate-400 text-sm mt-1">17 opções completas e equilibradas para as principais refeições do dia.</p>
+            </div>
+            <div class="flex items-center gap-2">
+                <span class="px-3 py-1 rounded-lg bg-slate-800 text-xs font-medium text-slate-300 border border-slate-700">Páginas 13 a 16</span>
+            </div>
+        </div>
+
+        <div id="lunch-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </section>
+
+    <!-- TAB 3: DICAS CANETINHA -->
+    <section id="tab-fast-snacks" class="tab-content space-y-6 hidden">
+        <div class="bg-gradient-to-r from-slate-900 to-slate-900/60 p-6 rounded-2xl border border-slate-800">
+            <h2 class="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+                <i class="fa-solid fa-pen-nib text-amber-400"></i> Protocolo Nutricional & Dicas Canetinha
+            </h2>
+            <p class="text-slate-400 text-sm mt-1">O passo a passo completo do porquê a nutrição importa até quando ajustar a dose.</p>
+        </div>
+
+        <div class="space-y-6">
+            <!-- 1. Como a caneta age -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
+                <h3 class="text-xl font-bold text-white flex items-center gap-2 text-emerald-400">
+                    <i class="fa-solid fa-syringe"></i> 1. Como a Caneta Age
+                </h3>
+                <p class="text-slate-300 text-sm leading-relaxed">
+                    As canetas GLP-1 agem nos receptores do hormônio GLP-1 (algumas também no GIP), o que significa: mais saciedade 🙌, esvaziamento gástrico lento 🐢, controle da fome 🍽️, diminuição da fome física e emocional 🧠, redução da velocidade de digestão, possível alteração da motilidade intestinal, melhoria do controle glicêmico 📉 e déficit calórico espontâneo mas também risco de colaterais gastrointestinais ⚠️.
+                </p>
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Por isso o foco nutricional deve ser:</p>
+                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-slate-300">
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>🥩 Alta proteína</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>🍽️ Digestibilidade</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>⏰ Fracionamento das refeições</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>💧 Hidratação</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>💪 Prevenção de perda muscular</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 2. Quanto de proteína você precisa -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
+                <h3 class="text-xl font-bold text-white flex items-center gap-2 text-emerald-400">
+                    <i class="fa-solid fa-drumstick-bite"></i> 2. Quanto de Proteína Você Precisa
+                </h3>
+                <p class="text-slate-300 text-sm leading-relaxed">
+                    A recomendação geral para quem usa caneta GLP-1 é <strong>1,8 a 2 g de proteína por kg de peso</strong> para preservar massa muscular 💪, controlar a fome 🍽️, acelerar recuperação muscular 🔄 e manter o metabolismo ativo 🔥 (em pessoas com IMC até 30).
+                </p>
+                <p class="text-slate-300 text-sm leading-relaxed">
+                    Se o seu IMC for 30 ou mais, calcular pelo peso atual pode superestimar bastante sua necessidade proteica, já que o excesso de gordura não precisa de proteína para ser mantido, por isso usamos o peso ajustado ⚖️.
+                </p>
+            </div>
+
+            <!-- 3. Hidratação diária -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
+                <h3 class="text-xl font-bold text-white flex items-center gap-2 text-cyan-400">
+                    <i class="fa-solid fa-droplet"></i> 3. Hidratação Diária
+                </h3>
+                <p class="text-slate-300 text-sm font-medium text-emerald-400">Hidratação correta = menos colaterais + mais resultado.</p>
+                <p class="text-slate-300 text-sm">Multiplique o seu peso por <strong>30 a 40 ml</strong> para achar a sua meta diária.</p>
+                <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs text-slate-300 space-y-1">
+                    <p class="font-bold text-slate-200">Exemplos:</p>
+                    <p>90 x 30 = 2.700 litros</p>
+                    <p>90 x 40 = 3.600 litros</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                        <p class="text-xs font-bold text-amber-400 uppercase tracking-wider mb-2">Sinais de pouca água:</p>
+                        <ul class="space-y-1 text-xs text-slate-300">
+                            <li>😴 Dor de cabeça</li>
+                            <li>🥱 Cansaço excessivo</li>
+                            <li>🔒 Intestino preso</li>
+                            <li>🤢 Náusea frequente</li>
+                            <li>🌵 Boca seca</li>
+                            <li>🟡 Urina escura</li>
+                            <li>😵‍💫 Sensação de fraqueza</li>
+                        </ul>
+                    </div>
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
+                        <p class="text-xs font-bold text-emerald-400 uppercase tracking-wider mb-2">Como beber sem passar mal:</p>
+                        <p class="text-xs text-slate-300 leading-relaxed">Evite grandes volumes de uma vez. Prefira pequenos goles ao longo do dia, 200–300ml por vez, líquidos entre as refeições (não junto da comida) — beber muita água junto da refeição pode piorar o empachamento e o refluxo.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 4. Como potenciar a resposta -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
+                <h3 class="text-xl font-bold text-white flex items-center gap-2 text-emerald-400">
+                    <i class="fa-solid fa-rocket"></i> 4. Como Potenciar a Resposta ao Medicamento
+                </h3>
+                <p class="text-slate-300 text-sm leading-relaxed">
+                    A caneta não faz milagre sozinha; ela cria um ambiente hormonal favorável, mas o resultado real depende de como o corpo é conduzido. Estes são os <strong>cinco pilares inegociáveis</strong>:
+                </p>
+                <div class="space-y-3 text-sm text-slate-300">
+                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                        <strong class="text-emerald-400">1. 💪 Massa muscular:</strong> sem estímulo adequado, o corpo perde gordura e músculo em conjunto. O treino de força não é opcional: faça de 3 a 5 vezes por semana, consuma hidratos de carbono antes de treinar (para mais energia) e movimente-se todos os dias para melhorar a sensibilidade à insulina.
+                    </div>
+                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                        <strong class="text-emerald-400">2. 😴 Sono:</strong> dormir mal piora a resistência à insulina, aumenta a inflamação, reduz a preservação muscular e diminui a eficácia metabólica da caneta. Um sono regulado potencializa o emagrecimento e reduz os efeitos colaterais.
+                    </div>
+                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                        <strong class="text-emerald-400">3. 🌱 Intestino regulado:</strong> quando o intestino não funciona bem, há mais inflamação, pior absorção de nutrientes e mais desconforto. Ajuste as fibras, beba água suficiente e mantenha uma rotina alimentar previsível.
+                    </div>
+                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                        <strong class="text-emerald-400">4. ⌛ Respeitar o tempo de adaptação:</strong> nem toda a semana precisa de um ajuste de dose. Subir a dose sem necessidade apenas aumenta os efeitos colaterais; mais dose não é igual a mais resultado.
+                    </div>
+                    <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                        <strong class="text-emerald-400">5. 🧘 Gerenciar o stresse:</strong> o stresse crónico mantém o cortisol elevado, o que dificulta a mobilização de gordura, favorece a retenção hídrica e piora a resistência à insulina. Tenha uma rotina mínima de desaceleração diária e pausas reais entre tarefas.
+                    </div>
+                </div>
+            </div>
+
+            <!-- 5. Quando ajustar a dose -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
+                <h3 class="text-xl font-bold text-white flex items-center gap-2 text-amber-400">
+                    <i class="fa-solid fa-scale-balanced"></i> 5. Quando Ajustar a Dose
+                </h3>
+                <p class="text-slate-300 text-sm leading-relaxed">Ajuste a dose apenas se, ao mesmo tempo:</p>
+                <ul class="space-y-2 text-sm text-slate-300">
+                    <li class="flex items-center gap-2">🍽️ O apetite continua alto.</li>
+                    <li class="flex items-center gap-2">⏸️ A perda de peso estagnou por 4–6 semanas.</li>
+                    <li class="flex items-center gap-2">✅ Você está sem colaterais fortes.</li>
+                    <li class="flex items-center gap-2">🥩 Sua ingesta proteica já está adequada.</li>
+                </ul>
+            </div>
+
+            <!-- Cardápio Ideal em Uso de Canetas -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
+                <h3 class="text-xl font-bold text-white flex items-center gap-2 text-emerald-400">
+                    <i class="fa-solid fa-utensils"></i> Cardápio Ideal em Uso de Canetas
+                </h3>
+                <p class="text-slate-300 text-sm leading-relaxed">
+                    Base de 130g de proteína/dia, ideal para preservar massa muscular durante o uso da caneta. Pense no cardápio como blocos: cada refeição contém 1 fonte de proteína (obrigatória) + 1 carboidrato (conforme fome) + fibras/vegetais sempre que possível. O peso indicado é sempre do alimento pronto, nunca cru, use a balança de cozinha.
+                </p>
+
+                <div class="space-y-4 pt-2">
+                    <h4 class="font-bold text-white text-base border-b border-slate-800 pb-2">Sugestões de Alimentação</h4>
+                    
+                    <!-- Café da manhã -->
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+                        <h5 class="font-semibold text-amber-400 text-sm">☀️ Café da Manhã</h5>
+                        <p class="text-xs font-bold text-slate-300">🍳 OPÇÃO 1</p>
+                        <ul class="text-xs text-slate-300 space-y-1">
+                            <li>• Pão integral (1 fatia)</li>
+                            <li>• Ovos (2 unidades)</li>
+                            <li>• Queijo (1 fatia) cottage, ricota ou mussarela</li>
+                            <li>• Mamão (120 g) ou outra fruta</li>
+                            <li>• Café preto</li>
+                        </ul>
+                    </div>
+
+                    <!-- Almoço -->
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+                        <h5 class="font-semibold text-indigo-400 text-sm">🍗 Almoço</h5>
+                        <ul class="text-xs text-slate-300 space-y-1">
+                            <li>• Peito de frango (120 g) ou tilápia</li>
+                            <li>• Arroz (80g) ou puré de batata inglesa (110g) ou puré de moranga (130g)</li>
+                            <li>• Saladas à vontade</li>
+                        </ul>
+                    </div>
+
+                    <!-- Vegetais -->
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
+                        <h5 class="font-semibold text-emerald-400 text-sm">🥦 Vegetais</h5>
+                        <p class="text-xs text-slate-300"><strong>Priorize cozidos</strong> (melhor tolerância digestiva, crus fermentam mais e podem gerar gases/estufamento): brócolis, couve-flor, couve, cenoura, abobrinha, vagem, espinafre, repolho, beterraba, pimentão.</p>
+                        <p class="text-xs text-slate-300 pt-1"><strong>Podem ser crus</strong> (leves, baixa fermentação): alface, tomate, pepino sem casca, rúcula, agrião, acelga.</p>
+                        <p class="text-xs text-slate-400 pt-1"><em>Atenção individual:</em> cebola e alho (melhor cozidos), milho (porções pequenas), leguminosas como ervilha/lentilha/feijão (sempre bem cozidas).</p>
+                    </div>
+
+                    <!-- Lanche da tarde -->
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-3">
+                        <h5 class="font-semibold text-amber-400 text-sm">🍎 Lanche da Tarde</h5>
+                        <div>
+                            <p class="text-xs font-bold text-slate-300">🥪 OPÇÃO 1 SANDUÍCHE DE FRANGO</p>
+                            <ul class="text-xs text-slate-300 space-y-1">
+                                <li>• Pão integral (2 fatias)</li>
+                                <li>• Queijo (1 fatia)</li>
+                                <li>• Frango desfiado ou carne moída (60g)</li>
+                                <li>• Requeijão light (15g) + alface, tomate</li>
+                            </ul>
+                        </div>
+                        <div class="pt-2 border-t border-slate-800">
+                            <p class="text-xs font-bold text-slate-300">OPÇÃO 2 IOGURTE COM WHEY E FRUTAS</p>
+                            <ul class="text-xs text-slate-300 space-y-1">
+                                <li>• Iogurte zero (170 ml)</li>
+                                <li>• Whey (1 dose 30g)</li>
+                                <li>• Frutas picadas</li>
+                                <li>• 20g de granola ou aveia</li>
+                            </ul>
+                        </div>
+                        <p class="text-xs text-slate-400 pt-1"><strong>🍓 Frutas preferidas (Baixa carga glicêmica + alta saciedade + menos risco de desconforto):</strong> Morango, Mirtilo, Framboesa, Amora, Kiwi, Maçã, Pêra, Melão, Abacate, Mamão.</p>
+                    </div>
+
+                    <!-- Jantar -->
+                    <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-3">
+                        <h5 class="font-semibold text-indigo-400 text-sm">🌙 Jantar</h5>
+                        <div>
+                            <p class="text-xs font-bold text-slate-300">OPÇÃO 1</p>
+                            <ul class="text-xs text-slate-300 space-y-1">
+                                <li>• Peito de frango (120g) ou tilápia</li>
+                                <li>• Arroz (80g) ou puré de batata (110g)</li>
+                                <li>• Saladas à vontade</li>
+                            </ul>
+                        </div>
+                        <div class="pt-2 border-t border-slate-800">
+                            <p class="text-xs font-bold text-slate-300">OPÇÃO 2 CREPIOCA</p>
+                            <ul class="text-xs text-slate-300 space-y-1">
+                                <li>• Ovos (2 unidades)</li>
+                                <li>• Tapioca (20g)</li>
+                                <li>• 1 pitada de sal</li>
+                                <li>• Recheio: frango desfiado com molho natural (80g) ou carne bovina picada + queijo mussarela (1 fatia) + saladas à vontade</li>
+                            </ul>
+                            <p class="text-xs text-slate-400 mt-2"><strong>Modo de preparo:</strong> bata os ovos com a tapioca e a pitada de sal até formar uma massa homogênea. Leve à frigideira antiaderente em fogo baixo, deixe firmar dos dois lados e recheie com o frango desfiado (ou a carne) e o queijo. Dobre ao meio e sirva quente.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-emerald-950/30 p-4 rounded-xl border border-emerald-900/50 text-xs text-slate-300 space-y-1">
+                        <p class="font-bold text-emerald-400">💡 Regras de Ouro:</p>
+                        <p>Priorize sempre a proteína, se não tiver fome, coma pelo menos a carne. Preparo livre (molho de tomate, assado, ao bafo, air fryer); só não frita nem molhos brancos. Carne vermelha no máximo 2x na semana.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TAB 4: TABELAS DE SUBSTITUIÇÕES -->
+    <section id="tab-substitutions" class="tab-content space-y-8 hidden">
+        <div class="bg-gradient-to-r from-slate-900 to-slate-900/60 p-6 rounded-2xl border border-slate-800">
+            <h2 class="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+                <i class="fa-solid fa-scale-balanced text-emerald-400"></i> Guias e Tabelas de Substituição
+            </h2>
+            <p class="text-slate-400 text-sm mt-1">Consulte equivalências exatas de saladas, carnes, tubérculos, frutas e sucos para personalizar suas refeições.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Saladas e Vegetais -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col">
+                <h3 class="font-bold text-lg text-white flex items-center gap-2 mb-4">
+                    <i class="fa-solid fa-carrot text-orange-400"></i> Saladas e Vegetais
+                </h3>
+                <div class="overflow-x-auto flex-grow">
+                    <table class="w-full text-left text-sm text-slate-300">
+                        <thead class="bg-slate-800/50 text-slate-400 uppercase text-xs">
+                            <tr>
+                                <th class="px-4 py-3 rounded-l-lg">Opção / Alimento</th>
+                                <th class="px-4 py-3 rounded-r-lg">Quantidade</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-salads" class="divide-y divide-slate-800"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Carnes -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col">
+                <h3 class="font-bold text-lg text-white flex items-center gap-2 mb-4">
+                    <i class="fa-solid fa-drumstick-bite text-red-400"></i> Substituições de Carnes (Base: 100g)
+                </h3>
+                <div class="overflow-x-auto flex-grow">
+                    <table class="w-full text-left text-sm text-slate-300">
+                        <thead class="bg-slate-800/50 text-slate-400 uppercase text-xs">
+                            <tr>
+                                <th class="px-4 py-3 rounded-l-lg">Categoria</th>
+                                <th class="px-4 py-3">Alimento</th>
+                                <th class="px-4 py-3 rounded-r-lg">Equivalente</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-meats" class="divide-y divide-slate-800"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Tubérculos -->
+            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col">
+                <h3 class="font-bold text-lg text-white flex items-center gap-2 mb-4">
+                    <i class="fa-solid fa-seedling text-amber-500"></i> Tubérculos (1 Porção)
+                </h3>
+                <div class="overflow-x-auto flex-grow">
+                    <table class="w-full text-left text-sm text-slate-300">
+                        <thead class="bg-slate-800/50 text-slate-400 uppercase text-xs">
+                            <tr>
+                                <th class="px-4 py-3 rounded-l-lg">Alimento</th>
+                                <th class="px-4 py-3 rounded-r-lg">Quantidade Cozida</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-tubers" class="divide-y divide-slate-800"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Frutas e Sucos -->
+            <div class="space-y-8 flex flex-col">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col">
+                    <h3 class="font-bold text-lg text-white flex items-center gap-2 mb-4">
+                        <i class="fa-solid fa-apple-whole text-emerald-400"></i> Frutas (1 Porção)
+                    </h3>
+                    <div class="overflow-x-auto max-h-72 overflow-y-auto">
+                        <table class="w-full text-left text-sm text-slate-300">
+                            <thead class="bg-slate-800/50 text-slate-400 uppercase text-xs sticky top-0 bg-slate-900">
+                                <tr>
+                                    <th class="px-4 py-3 rounded-l-lg">Fruta</th>
+                                    <th class="px-4 py-3 rounded-r-lg">Quantidade</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-fruits" class="divide-y divide-slate-800"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col">
+                    <h3 class="font-bold text-lg text-white flex items-center gap-2 mb-4">
+                        <i class="fa-solid fa-glass-water text-cyan-400"></i> Substituição de Frutas por Sucos
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-sm text-slate-300">
+                            <thead class="bg-slate-800/50 text-slate-400 uppercase text-xs">
+                                <tr>
+                                    <th class="px-4 py-3 rounded-l-lg">Suco / Polpa</th>
+                                    <th class="px-4 py-3 rounded-r-lg">Equivalência</th>
+                                </tr>
+                            </thead>
+                            <tbody id="table-juices" class="divide-y divide-slate-800"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<!-- Footer -->
+<footer class="bg-slate-900 border-t border-slate-800 mt-12 py-6 text-center text-xs text-slate-500">
+    <p>NutriPlan Pro • Desenvolvido com base no seu material nutricional personalizado.</p>
+</footer>
+
+<!-- JavaScript Application Logic -->
+<script>
+    const breakfastData = [
+        { id: 1, title: "Pão com ovo, queijo, alface e tomate acompanhado de frutas", ingredients: ["1 pão francês (50g) ou 2 fatias de pão de forma (50g).", "3 ovos inteiros.", "30g de queijo muçarela.", "Alface e tomate à vontade.", "1 porção de fruta."], prep: null, tag: "Café ou Lanche" },
+        { id: 2, title: "Sanduíche de frango acompanhado de frutas", ingredients: ["1,5 pão francês (75g) ou 3 fatias de pão de forma (75g).", "85g de peito de frango desfiado.", "40g de creme de ricota light.", "Alface e tomate à vontade.", "3 porções de fruta."], prep: null, tag: "Café ou Lanche" },
+        { id: 3, title: "Sanduíche de carne magra acompanhado de frutas", ingredients: ["1,5 pão francês (75g) ou 3 fatias de pão de forma (75g).", "70g de carne magra.", "30g de creme de ricota light.", "Alface e tomate à vontade.", "3,5 porções de fruta."], prep: null, tag: "Café ou Lanche" },
+        { id: 4, title: "Sanduíche de atum acompanhado de frutas", ingredients: ["2 pães franceses (100g) ou 4 fatias de pão de forma (100g).", "100g de atum em água.", "35g de creme de ricota light.", "Alface e tomate à vontade.", "2,5 porções de fruta."], prep: null, tag: "Café ou Lanche" },
+        { id: 5, title: "Ovos cremosos com torrada de pão e frutas", ingredients: ["1 pão francês (50g) ou 2 fatias de pão de forma (50g).", "2 ovos inteiros.", "25g de queijo muçarela.", "30g de creme de ricota light.", "3 porções de fruta."], prep: "Mexa os ovos em frigideira antiaderente, em fogo baixo. Quando começarem a firmar, acrescente a muçarela e o creme de ricota. Sirva com o pão torrado.", tag: "Café ou Lanche" },
+        { id: 6, title: "Cuscuz com ovos acompanhado de frutas", ingredients: ["180g de cuscuz cozido (55g cru).", "3 ovos inteiros.", "2,5 porções de fruta."], prep: null, tag: "Café ou Lanche" },
+        { id: 7, title: "Cuscuz com frango acompanhado de frutas", ingredients: ["190g de cuscuz cozido (60g cru).", "90g de frango desfiado.", "40g de creme de ricota light.", "Tomate a gosto.", "3 porções de fruta."], prep: null, tag: "Café ou Lanche" },
+        { id: 8, title: "Vitamina de frutas com whey protein e leite desnatado", ingredients: ["300ml de leite desnatado.", "40g de whey protein.", "25g de aveia em flocos.", "5 porções de fruta."], prep: "Bata os ingredientes no liquidificador.", tag: "Café ou Lanche" },
+        { id: 9, title: "Shake de whey com leite desnatado e frutas", ingredients: ["400ml de leite desnatado.", "40g de whey protein.", "6,5 porções de fruta."], prep: "Bata o leite com o whey e consuma as frutas à parte.", tag: "Café ou Lanche" },
+        { id: 10, title: "Shake proteico com paçoca e frutas", ingredients: ["300ml de leite desnatado.", "40g de whey protein.", "1 paçoca (22g) ou 20g de pasta de amendoim.", "4 porções de fruta."], prep: "Bata os ingredientes no liquidificador.", tag: "Café ou Lanche" },
+        { id: 11, title: "Caldinha de whey protein com frutas", ingredients: ["9,5 porções de fruta.", "45g de whey protein.", "60ml de leite desnatado."], prep: "Acrescente o leite aos poucos ao whey até formar uma calda. Despeje sobre as frutas.", tag: "Café ou Lanche" },
+        { id: 12, title: "Sorvete de frutas congeladas com whey protein", ingredients: ["40g de whey protein.", "30g de leite desnatado em pó.", "7,5 porções de fruta congelada."], prep: "Bata as frutas congeladas com o whey e o leite em pó no mixer.", tag: "Café ou Lanche" },
+        { id: 13, title: "Pipoca com shake de whey, leite desnatado e frutas", ingredients: ["45g de milho de pipoca cru.", "10g de margarina light ou 3g de óleo.", "290ml de leite desnatado.", "40g de whey protein.", "2 porções de fruta."], prep: "Estoure o milho. Misture o leite com o whey para fazer o shake.", tag: "Café ou Lanche" },
+        { id: 14, title: "Sucrilhos com leite desnatado, frutas e whey protein", ingredients: ["45g de Sucrilhos.", "170ml de leite desnatado.", "40g de whey protein.", "4 porções de fruta."], prep: null, tag: "Café ou Lanche" },
+        { id: 15, title: "Mingau proteico de aveia e maçã", ingredients: ["45g de aveia em flocos.", "300ml de leite desnatado.", "200g de maçã em cubinhos.", "35g de whey protein.", "Canela a gosto."], prep: null, tag: "Café ou Lanche" },
+        { id: 16, title: "Panqueca de chocolate com caldinha de whey e frutas", ingredients: ["1 ovo.", "30g de aveia em flocos finos.", "20g de cacau em pó 50%.", "35g de whey de chocolate.", "40ml de leite desnatado.", "3 porções de fruta."], prep: "Misture ovo, aveia, cacau e fermento. Cozinhe na frigideira. Faça a calda com whey e leite.", tag: "Café ou Lanche" },
+        { id: 17, title: "Panqueca de banana com calda de whey e frutas", ingredients: ["100g de banana amassada.", "25g de farinha de aveia.", "1 ovo.", "40g de whey de chocolate.", "40ml de leite desnatado.", "2 porções de fruta."], prep: "Misture banana, farinha e ovo. Cozinhe e cubra com a calda de whey.", tag: "Café ou Lanche" },
+        { id: 18, title: "Pão de queijo de frigideira acompanhado de frutas", ingredients: ["2 ovos.", "50g de goma de tapioca.", "35g de queijo muçarela.", "10g de fermento químico.", "3,5 porções de fruta."], prep: "Misture os ingredientes e leve à frigideira em fogo baixo.", tag: "Café ou Lanche" },
+        { id: 19, title: "Wrap de carne magra acompanhado de frutas", ingredients: ["2 unidades de Rap10 (80g).", "70g de carne magra.", "30g de queijo muçarela.", "Alface e tomate à vontade.", "1,5 porção de fruta."], prep: null, tag: "Café ou Lanche" },
+        { id: 20, title: "Iogurte com frutas, whey e aveia ou granola", ingredients: ["1 pote de iogurte natural desnatado (160g).", "4,5 porções de fruta.", "40g de whey protein.", "40g de aveia ou granola sem açúcar."], prep: null, tag: "Café ou Lanche" },
+        { id: 21, title: "YoPRO Danone com torrada e geleia, acompanhado de frutas", ingredients: ["1 unidade de YoPRO Danone (250ml).", "1 pacote de torrada de cacau e cereais (19g).", "60g de geleia light.", "6 porções de fruta."], prep: null, tag: "Café ou Lanche" },
+        { id: 22, title: "Tapioca de frango com queijo e frutas", ingredients: ["70g de goma de tapioca.", "30g de queijo muçarela.", "90g de peito de frango cozido e desfiado.", "Tomate e orégano.", "2,5 porções de fruta."], prep: null, tag: "Café ou Lanche" },
+        { id: 23, title: "Crepioca recheada com frango e frutas", ingredients: ["2 ovos.", "50g de goma de tapioca.", "70g de peito de frango desfiado.", "30g de ricota light.", "3 porções de fruta."], prep: "Misture ovos e tapioca, cozinhe na frigideira e recheie.", tag: "Café ou Lanche" },
+        { id: 24, title: "Barrinha de proteína Bold acompanhada de frutas", ingredients: ["2 barrinhas de proteína Bold.", "3 porções de fruta."], prep: null, tag: "Café ou Lanche" },
+        { id: 25, title: "Pasteizinhos de frango com queijo na Air Fryer e frutas", ingredients: ["2 massas de pastel Massa Leve (60g).", "70g de frango desfiado.", "30g de ricota light.", "30g de muçarela.", "2 porções de fruta."], prep: "Asse na Air Fryer a 200°C por 4-5 minutos.", tag: "Café ou Lanche" },
+        { id: 26, title: "Açaí com whey protein acompanhado de frutas", ingredients: ["230g de açaí Paletitas ou similar.", "40g de whey protein.", "2 porções de fruta."], prep: null, tag: "Café ou Lanche" },
+        { id: 27, title: "Banana-da-terra cozida com ovos", ingredients: ["170g de banana-da-terra.", "4 ovos inteiros."], prep: null, tag: "Café ou Lanche" },
+        { id: 28, title: "Tubérculos com ovos e frutas", ingredients: ["4 porções de tubérculos.", "3 ovos inteiros.", "2,5 porções de fruta."], prep: "Consulte equivalências na tabela de substituições.", tag: "Café ou Lanche" },
+        { id: 29, title: "Bolo de caneca no micro-ondas com frutas", ingredients: ["1 ovo.", "70g de banana-prata amassada.", "30g de aveia.", "35g de whey protein.", "3 porções de fruta."], prep: "Leve ao micro-ondas por 3-4 minutos. Sirva com calda de whey.", tag: "Café ou Lanche" },
+        { id: 30, title: "Cappuccino proteico com torrada e geleia, com frutas", ingredients: ["250ml de leite desnatado.", "15g de cacau em pó.", "30g de whey.", "1 pão francês (50g) ou torrada.", "40g de geleia light.", "1,5 porção de fruta."], prep: null, tag: "Café ou Lanche" },
+        { id: 31, title: "Cappuccino com torrada recheada e frutas", ingredients: ["180ml de leite desnatado, cacau e whey.", "1 pão francês (50g).", "20g de passata e 20g de ricota light.", "1 ovo.", "1 porção de fruta."], prep: null, tag: "Café ou Lanche" },
+        { id: 32, title: "Pizza de pão sírio acompanhada de frutas", ingredients: ["1 pão sírio pita (50g).", "60g de passata de tomate.", "30g de muçarela.", "80g de frango desfiado.", "4 porções de fruta."], prep: "Asse na Air Fryer por 10 minutos.", tag: "Café ou Lanche" },
+        { id: 33, title: "Ovos napolitanos acompanhados de frutas", ingredients: ["3 ovos inteiros.", "170g de molho de tomate.", "40g de muçarela.", "3,5 porções de fruta."], prep: "Aqueça o molho, adicione os ovos e finalize com muçarela.", tag: "Café ou Lanche" },
+        { id: 34, title: "Esfiha saudável acompanhada de frutas", ingredients: ["270g de batata inglesa.", "20g de farinha de aveia.", "80g de frango desfiado.", "1 clara de ovo.", "3 porções de fruta."], prep: "Modele as esfihas e asse a 180°C por 15-20 min.", tag: "Café ou Lanche" },
+        { id: 35, title: "Bolo de limão fit acompanhado de frutas", ingredients: ["1 ovo, 70g de iogurte natural.", "40g de farinha de aveia, suco de meio limão.", "35g de whey protein.", "3,5 porções de fruta."], prep: "Leve ao micro-ondas por 2 minutos.", tag: "Café ou Lanche" },
+        { id: 36, title: "Doritos fit com patê de frango e frutas", ingredients: ["2 unidades de Rap10 (80g).", "85g de frango desfiado, 40g de ricota light.", "2 porções de fruta."], prep: "Corte o Rap10 em triângulos e asse na Air Fryer a 200°C por 10 min.", tag: "Café ou Lanche" }
+    ];
+
+    const lunchData = [
+        { id: 1, title: "Arroz, feijão, carne magra grelhada e salada", ingredients: ["140g de arroz cozido.", "140g de feijão carioca cozido.", "90g de carne magra grelhada.", "250g de salada mista."], prep: "Grelhe a carne e sirva com os grãos e salada.", tag: "Almoço ou Jantar" },
+        { id: 2, title: "Arroz, frango e salada", ingredients: ["190g de arroz cozido.", "120g de filé de frango.", "300g de salada mista."], prep: "Grelhe o frango com temperos naturais.", tag: "Almoço ou Jantar" },
+        { id: 3, title: "Arroz, feijão, tubérculos, carne magra e salada", ingredients: ["100g de arroz cozido, 100g de feijão cozido.", "90g de carne magra grelhada.", "1,5 porção de tubérculos.", "250g de salada."], prep: null, tag: "Almoço ou Jantar" },
+        { id: 4, title: "Tubérculos com carne magra e salada", ingredients: ["5 porções de tubérculos.", "100g de carne magra.", "250g de salada mista."], prep: "Pode preparar em purê ou assados na Air Fryer.", tag: "Almoço ou Jantar" },
+        { id: 5, title: "Caldinho de tubérculos e legumes", ingredients: ["4,5 porções de tubérculos.", "100g de carne magra, 30g de ricota light.", "120g de cenoura cozida."], prep: "Bata os tubérculos e cenoura cozidos, acrescente a carne.", tag: "Almoço ou Jantar" },
+        { id: 6, title: "Hambúrguer de carne magra com batata frita na Air Fryer", ingredients: ["1 pão de hambúrguer ou francês (50g).", "90g de carne magra.", "25g de muçarela.", "70g de batata congelada ou 140g natural na Air Fryer."], prep: null, tag: "Almoço ou Jantar" },
+        { id: 7, title: "Saladão mata-fome com molho de iogurte natural", ingredients: ["600g de vegetais variados.", "70g de milho, 65g de grão-de-bico.", "100g de frango, 160g de iogurte natural."], prep: "Misture os vegetais e prepare o molho com iogurte.", tag: "Almoço ou Jantar" },
+        { id: 8, title: "Frango com quiabo e polenta acompanhado de salada", ingredients: ["120g de frango sem pele.", "120g de quiabo, 250g de polenta.", "300g de salada."], prep: null, tag: "Almoço ou Jantar" },
+        { id: 9, title: "Moela de frango com tubérculos e salada", ingredients: ["135g de moela de frango cozida.", "5 porções de tubérculos.", "250g de salada."], prep: null, tag: "Almoço ou Jantar" },
+        { id: 10, title: "Bucho com tubérculos acompanhado de salada", ingredients: ["150g de bucho.", "5 porções de tubérculos.", "250g de salada."], prep: null, tag: "Almoço ou Jantar" },
+        { id: 11, title: "Estrogonofe de frango fit com arroz, batata palha e brócolis", ingredients: ["100g de peito de frango, 120g de arroz.", "30g de ricota light, 150g de brócolis.", "20g de batata palha."], prep: "Grelhe o frango, adicione ricota para dar o ponto de estrogonofe.", tag: "Almoço ou Jantar" },
+        { id: 12, title: "Macarrão ao molho bolonhesa com salada", ingredients: ["165g de macarrão cozido.", "90g de carne bovina moída.", "100g de passata de tomate.", "250g de salada."], prep: null, tag: "Almoço ou Jantar" },
+        { id: 13, title: "Coxa de frango assada com batatas rústicas, arroz e salada", ingredients: ["120g de coxa ou peito de frango.", "120g de arroz, 200g de batata inglesa.", "250g de salada."], prep: null, tag: "Almoço ou Jantar" },
+        { id: 14, title: "Pizza de frango com requeijão Seara Gourmet e salada", ingredients: ["230g de pizza de frango Seara Gourmet.", "12g de ketchup.", "250g de salada."], prep: null, tag: "Almoço ou Jantar" },
+        { id: 15, title: "Lasanha gourmet à bolonhesa Seara com salada", ingredients: ["280g de lasanha à bolonhesa Menu Gourmet Seara.", "250g de salada."], prep: null, tag: "Almoço ou Jantar" },
+        { id: 16, title: "Churrasquinho de frango com arroz, farofa e vinagrete", ingredients: ["120g de frango.", "150g de vinagrete, 100g de arroz, 25g de farofa."], prep: null, tag: "Almoço ou Jantar" },
+        { id: 17, title: "Coxinha fit de batata inglesa acompanhada de salada", ingredients: ["250g de batata inglesa, 100g de frango desfiado.", "40g de ricota light, 15g de farinha de aveia, 20g de muçarela.", "200g de salada."], prep: "Modele as coxinhas e asse na Air Fryer a 200°C por 15 min.", tag: "Almoço ou Jantar" }
+    ];
+
+    const substitutionSalads = [
+        ["Alface, tomate, pepino e cenoura", "250g"],
+        ["Rúcula com tomate", "250g"],
+        ["Abobrinha italiana", "200g"],
+        ["Couve-flor", "200g"],
+        ["Chuchu", "200g"],
+        ["Pepino, tomate e cebola", "150g"],
+        ["Cenoura e vagem", "150g"],
+        ["Cenoura e beterraba ralada", "100g"],
+        ["Repolho roxo", "100g"],
+        ["Seleta de legumes", "70g"],
+        ["Brócolis", "150g"],
+        ["Milho verde", "70g"]
+    ];
+
+    const substitutionMeats = [
+        ["Frango", "Peito de frango", "100g"],
+        ["Frango", "Coxa de frango", "100g"],
+        ["Frango", "Moela de frango", "110g"],
+        ["Frango", "Coração de frango", "80g"],
+        ["Frango", "Sobrecoxa sem pele", "70g"],
+        ["Bovinos", "Músculo bovino", "90g"],
+        ["Bovinos", "Contrafilé bovino", "90g"],
+        ["Bovinos", "Paleta bovina", "90g"],
+        ["Bovinos", "Filé mignon bovino", "80g"],
+        ["Bovinos", "Patinho bovino", "80g"],
+        ["Bovinos", "Coxão mole", "80g"],
+        ["Bovinos", "Acém bovino", "80g"],
+        ["Bovinos", "Alcatra", "70g"],
+        ["Suínos", "Filé mignon suíno", "80g"],
+        ["Suínos", "Lombo suíno", "80g"],
+        ["Pescados", "Atum em água", "180g"],
+        ["Pescados", "Camarão", "180g"],
+        ["Pescados", "Cação", "140g"],
+        ["Pescados", "Merluza", "135g"],
+        ["Pescados", "Filé de tilápia", "130g"],
+        ["Pescados", "Bacalhau", "120g"],
+        ["Pescados", "Filé de salmão", "70g"],
+        ["Pescados", "Sardinha enlatada", "60g"]
+    ];
+
+    const substitutionTubers = [
+        ["Abóbora moranga", "170g"],
+        ["Cenoura", "170g"],
+        ["Beterraba", "160g"],
+        ["Abóbora cabotiá", "100g"],
+        ["Batata inglesa", "100g"],
+        ["Batata-baroa", "70g"],
+        ["Batata-doce", "70g"],
+        ["Inhame (cará)", "60g"],
+        ["Mandioca (aipim)", "40g"]
+    ];
+
+    const substitutionFruits = [
+        ["Melancia", "100g"], ["Melão", "100g"], ["Morango", "100g"], ["Jambo", "100g"],
+        ["Acerola", "100g"], ["Pêssego", "90g"], ["Mexerica poncã", "80g"], ["Mamão papaia", "80g"],
+        ["Pitanga", "70g"], ["Mamão formosa", "70g"], ["Figo", "70g"], ["Caju", "70g"],
+        ["Laranja", "70g"], ["Uva", "60g"], ["Kiwi", "60g"], ["Pitaya", "60g"],
+        ["Ameixa", "60g"], ["Maçã", "60g"], ["Abacaxi", "60g"], ["Goiaba", "60g"],
+        ["Manga Tommy", "60g"], ["Manga Palmer", "50g"], ["Pera", "50g"], ["Graviola", "50g"],
+        ["Amora", "50g"], ["Abacate", "30g"], ["Banana", "30g"], ["Banana-da-terra", "25g"]
+    ];
+
+    const substitutionJuices = [
+        ["Abacaxi (100ml)", "2 porções de fruta"],
+        ["Laranja (100ml)", "1,5 porção"],
+        ["Morango (100ml)", "1 porção"],
+        ["Uva integral (100ml)", "2 porções"],
+        ["Acerola (100g de polpa)", "1 porção"],
+        ["Caju (100g de polpa)", "1,5 porção"],
+        ["Limão (100g de polpa)", "1 porção"],
+        ["Maracujá natural (100g de polpa)", "1 porção"]
+    ];
+
+    function renderCards(data, containerId) {
+        const container = document.getElementById(containerId);
+        container.innerHTML = "";
+
+        data.forEach(item => {
+            const card = document.createElement('div');
+            card.className = "bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between hover:border-emerald-500/50 transition-all shadow-xl group";
+            
+            let ingredientsList = item.ingredients.map(ing => `<li class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-2 flex-shrink-0"></span><span>${ing}</span></li>`).join('');
+            
+            let prepHtml = item.prep ? `
+                <div class="mt-4 pt-3 border-t border-slate-800/80 text-xs text-slate-400">
+                    <span class="font-semibold text-emerald-400 flex items-center gap-1 mb-1"><i class="fa-solid fa-fire-burner"></i> Modo de Preparo:</span>
+                    <p class="leading-relaxed">${item.prep}</p>
+                </div>
+            ` : '';
+
+            card.innerHTML = `
+                <div>
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs font-bold px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Opção ${item.id}</span>
+                        <span class="text-xs text-slate-500">${item.tag}</span>
+                    </div>
+                    <h3 class="font-bold text-base text-white group-hover:text-emerald-300 transition-colors mb-3">${item.title}</h3>
+                    <ul class="space-y-1.5 text-sm text-slate-300">
+                        ${ingredientsList}
+                    </ul>
+                </div>
+                ${prepHtml}
+            `;
+            container.appendChild(card);
+        });
+    }
+
+    function renderTables() {
+        document.getElementById('table-salads').innerHTML = substitutionSalads.map(row => `
+            <tr class="hover:bg-slate-800/40"><td class="px-4 py-2.5">${row[0]}</td><td class="px-4 py-2.5 font-semibold text-emerald-400">${row[1]}</td></tr>
+        `).join('');
+
+        document.getElementById('table-meats').innerHTML = substitutionMeats.map(row => `
+            <tr class="hover:bg-slate-800/40"><td class="px-4 py-2.5 text-slate-400">${row[0]}</td><td class="px-4 py-2.5">${row[1]}</td><td class="px-4 py-2.5 font-semibold text-emerald-400">${row[2]}</td></tr>
+        `).join('');
+
+        document.getElementById('table-tubers').innerHTML = substitutionTubers.map(row => `
+            <tr class="hover:bg-slate-800/40"><td class="px-4 py-2.5">${row[0]}</td><td class="px-4 py-2.5 font-semibold text-emerald-400">${row[1]}</td></tr>
+        `).join('');
+
+        document.getElementById('table-fruits').innerHTML = substitutionFruits.map(row => `
+            <tr class="hover:bg-slate-800/40"><td class="px-4 py-2.5">${row[0]}</td><td class="px-4 py-2.5 font-semibold text-emerald-400">${row[1]}</td></tr>
+        `).join('');
+
+        document.getElementById('table-juices').innerHTML = substitutionJuices.map(row => `
+            <tr class="hover:bg-slate-800/40"><td class="px-4 py-2.5">${row[0]}</td><td class="px-4 py-2.5 font-semibold text-emerald-400">${row[1]}</td></tr>
+        `).join('');
+    }
+
+    // Tab switching logic
+    function switchTab(tabName) {
+        document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.className = "tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white";
+        });
+
+        document.getElementById(`tab-${tabName}`).classList.remove('hidden');
+        const activeBtn = document.getElementById(`btn-${tabName}`);
+        if (activeBtn) {
+            activeBtn.className = "tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all flex items-center space-x-2 whitespace-nowrap bg-emerald-600 text-white shadow-lg shadow-emerald-900/40";
+        }
+        
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Initial load
+    window.onload = function() {
+        renderCards(breakfastData, 'breakfast-grid');
+        renderCards(lunchData, 'lunch-grid');
+        renderTables();
+        switchTab('home'); // Abre na tela inicial por padrão
+    };
+</script>
