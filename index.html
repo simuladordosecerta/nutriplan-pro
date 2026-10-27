@@ -33,7 +33,7 @@
         body { font-family: 'Inter', sans-serif; }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-emerald-500 selection:text-white">
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-emerald-500 selection:text-white pb-24">
 
     <!-- Top Header / Dashboard Navbar -->
     <header class="sticky top-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-800">
@@ -88,14 +88,30 @@
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
         <!-- TELA INICIAL / BOAS-VINDAS -->
-        <section id="tab-home" class="tab-content space-y-6 text-center py-16">
+        <section id="tab-home" class="tab-content space-y-6 text-center py-12">
             <div class="max-w-2xl mx-auto space-y-4 bg-slate-900 border border-slate-800 p-8 rounded-3xl shadow-2xl">
                 <div class="w-16 h-16 bg-emerald-500/10 text-emerald-400 rounded-2xl flex items-center justify-center mx-auto text-2xl border border-emerald-500/20">
                     <i class="fa-solid fa-utensils"></i>
                 </div>
                 <h2 class="text-3xl font-bold tracking-tight text-white">Bem-vindo ao NutriPlan Pro</h2>
                 <p class="text-slate-400 text-sm leading-relaxed">
-                    Selecione uma das categorias no menu acima para abrir os cardápios de Café & Lanche, Almoço & Jantar, conferir as Dicas Canetinha ou consultar as Tabelas de Substituição.
+                    Selecione uma das categorias no menu acima para abrir os cardápios de Café & Lanche, Almoço & Jantar, conferir as Dicas Canetinha ou consultar as Tabelas de Substituição. Você pode selecionar refeições para gerar seu plano personalizado.
+                </p>
+            </div>
+
+            <div class="max-w-2xl mx-auto space-y-4 bg-slate-900 border border-slate-800 p-8 rounded-3xl shadow-2xl text-left">
+                <h3 class="text-xl font-bold text-emerald-400 flex items-center gap-2">
+                    <span>💚</span> NutriPlan Pro - Alimentação inteligente para todos!
+                </h3>
+                <p class="text-slate-300 text-sm leading-relaxed">
+                    Este site é gratuito e foi criado para ajudar você a organizar sua alimentação de forma prática, acessível e inteligente. Aqui você encontra sugestões de cardápios, opções de substituição de alimentos e dicas para facilitar sua rotina alimentar.
+                </p>
+                <p class="text-slate-300 text-sm leading-relaxed">
+                    Nosso objetivo é compartilhar conhecimento, simplificar escolhas e ajudar mais pessoas a terem uma relação melhor com a alimentação. Tudo isso de forma gratuita, porque acreditamos que a informação deve estar ao alcance de todos!
+                </p>
+                <p class="text-slate-300 text-sm font-medium pt-2 border-t border-slate-800 flex items-center justify-between">
+                    <span>Aproveite, explore e compartilhe! Sua saúde merece atenção.</span>
+                    <span class="text-xl">🥗</span>
                 </p>
             </div>
         </section>
@@ -456,6 +472,62 @@
 
     </main>
 
+    <!-- Modal de Frutas -->
+    <div id="fruits-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-6 shadow-2xl relative space-y-4 animate-in fade-in zoom-in duration-200">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+                <h3 id="modal-title" class="font-bold text-lg text-white flex items-center gap-2">
+                    <i class="fa-solid fa-apple-whole text-emerald-400"></i> Opções de Frutas
+                </h3>
+                <button onclick="closeFruitsModal()" class="w-8 h-8 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition-all">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="overflow-y-auto max-h-[60vh] pr-1">
+                <table class="w-full text-left text-sm text-slate-300">
+                    <thead class="bg-slate-800/50 text-slate-400 uppercase text-xs sticky top-0 bg-slate-900">
+                        <tr>
+                            <th class="px-4 py-2.5 rounded-l-lg">Fruta</th>
+                            <th class="px-4 py-2.5 rounded-r-lg">Quantidade</th>
+                        </tr>
+                    </thead>
+                    <tbody id="modal-table-body" class="divide-y divide-slate-800"></tbody>
+                </table>
+            </div>
+            <div class="pt-2 border-t border-slate-800 flex justify-end">
+                <button onclick="closeFruitsModal()" class="px-4 py-2 rounded-xl text-xs font-semibold bg-emerald-600 text-white hover:bg-emerald-500 transition-all">
+                    Fechar
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Floating Selection Action Bar -->
+    <div id="selection-bar" class="fixed bottom-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur-md border-t border-slate-800 p-4 shadow-2xl transform translate-y-full transition-transform duration-300">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold border border-emerald-500/30">
+                    <span id="selected-count">0</span>
+                </div>
+                <div>
+                    <p class="font-bold text-sm text-white">Refeições Selecionadas</p>
+                    <p class="text-xs text-slate-400">Pronto para copiar ou enviar via WhatsApp</p>
+                </div>
+            </div>
+            <div class="flex items-center space-x-3 w-full sm:w-auto justify-end">
+                <button onclick="clearSelection()" class="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all">
+                    Limpar Seleção
+                </button>
+                <button onclick="copyFormattedText()" class="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800 text-emerald-400 border border-emerald-500/30 hover:bg-slate-700 transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-copy"></i> Copiar Texto
+                </button>
+                <button onclick="sendWhatsApp()" class="px-5 py-2 rounded-xl text-xs font-semibold bg-emerald-600 text-white hover:bg-emerald-500 shadow-lg shadow-emerald-900/40 transition-all flex items-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-sm"></i> Enviar WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="bg-slate-900 border-t border-slate-800 mt-12 py-6 text-center text-xs text-slate-500">
         <p>NutriPlan Pro • Desenvolvido com base no seu material nutricional personalizado.</p>
@@ -575,14 +647,15 @@
             ["Mandioca (aipim)", "40g"]
         ];
 
-        const substitutionFruits = [
-            ["Melancia", "100g"], ["Melão", "100g"], ["Morango", "100g"], ["Jambo", "100g"],
-            ["Acerola", "100g"], ["Pêssego", "90g"], ["Mexerica poncã", "80g"], ["Mamão papaia", "80g"],
-            ["Pitanga", "70g"], ["Mamão formosa", "70g"], ["Figo", "70g"], ["Caju", "70g"],
-            ["Laranja", "70g"], ["Uva", "60g"], ["Kiwi", "60g"], ["Pitaya", "60g"],
-            ["Ameixa", "60g"], ["Maçã", "60g"], ["Abacaxi", "60g"], ["Goiaba", "60g"],
-            ["Manga Tommy", "60g"], ["Manga Palmer", "50g"], ["Pera", "50g"], ["Graviola", "50g"],
-            ["Amora", "50g"], ["Abacate", "30g"], ["Banana", "30g"], ["Banana-da-terra", "25g"]
+        // Tabela base de 1 porção de fruta (em gramas base)
+        const substitutionFruitsBase = [
+            ["Melancia", 100], ["Melão", 100], ["Morango", 100], ["Jambo", 100],
+            ["Acerola", 100], ["Pêssego", 90], ["Mexerica poncã", 80], ["Mamão papaia", 80],
+            ["Pitanga", 70], ["Mamão formosa", 70], ["Figo", 70], ["Caju", 70],
+            ["Laranja", 70], ["Uva", 60], ["Kiwi", 60], ["Pitaya", 60],
+            ["Ameixa", 60], ["Maçã", 60], ["Abacaxi", 60], ["Goiaba", 60],
+            ["Manga Tommy", 60], ["Manga Palmer", 50], ["Pera", 50], ["Graviola", 50],
+            ["Amora", 50], ["Abacate", 30], ["Banana", 30], ["Banana-da-terra", 25]
         ];
 
         const substitutionJuices = [
@@ -596,15 +669,55 @@
             ["Maracujá natural (100g de polpa)", "1 porção"]
         ];
 
-        function renderCards(data, containerId) {
+        // Estado das seleções
+        let selectedMeals = new Set();
+
+        function renderCards(data, containerId, categoryKey) {
             const container = document.getElementById(containerId);
             container.innerHTML = "";
 
             data.forEach(item => {
+                const uniqueId = `${categoryKey}-${item.id}`;
+                const isSelected = selectedMeals.has(uniqueId);
+
                 const card = document.createElement('div');
-                card.className = "bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between hover:border-emerald-500/50 transition-all shadow-xl group";
+                card.id = `card-${uniqueId}`;
+                card.className = `bg-slate-900 border rounded-2xl p-6 flex flex-col justify-between transition-all shadow-xl group ${isSelected ? 'border-emerald-500 ring-2 ring-emerald-500/20 bg-emerald-950/10' : 'border-slate-800 hover:border-slate-700'}`;
                 
-                let ingredientsList = item.ingredients.map(ing => `<li class="flex items-start gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-2 flex-shrink-0"></span><span>${ing}</span></li>`).join('');
+                // Processar ingredientes e adicionar botão "Ver Frutas" caso o ingrediente mencione fruta
+                let ingredientsList = "";
+                item.ingredients.forEach(ing => {
+                    const lowerIng = ing.toLowerCase();
+                    const hasFruit = lowerIng.includes("porção de fruta") || lowerIng.includes("fruta") || lowerIng.includes("frutas");
+                    
+                    if (hasFruit) {
+                        // Extrair multiplicador de porção se houver (ex: "2,5 porções de fruta" ou "1 porção de fruta")
+                        let multiplier = 1;
+                        const match = ing.match(/([\d,\.]+)\s*porç[õo]es?\s*de\s*fruta/i);
+                        if (match) {
+                            multiplier = parseFloat(match[1].replace(',', '.'));
+                        }
+
+                        ingredientsList += `
+                            <li class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 py-1 border-t border-slate-800/50 mt-1">
+                                <div class="flex items-start gap-2">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-2 flex-shrink-0"></span>
+                                    <span>${ing}</span>
+                                </div>
+                                <button onclick="openFruitsModal('${multiplier}', '${ing.replace(/'/g, "\\'")}')" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 transition-all flex items-center gap-1.5 self-start sm:self-auto">
+                                    <i class="fa-solid fa-apple-whole"></i> Ver Frutas
+                                </button>
+                            </li>
+                        `;
+                    } else {
+                        ingredientsList += `
+                            <li class="flex items-start gap-2">
+                                <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-2 flex-shrink-0"></span>
+                                <span>${ing}</span>
+                            </li>
+                        `;
+                    }
+                });
                 
                 let prepHtml = item.prep ? `
                     <div class="mt-4 pt-3 border-t border-slate-800/80 text-xs text-slate-400">
@@ -616,18 +729,112 @@
                 card.innerHTML = `
                     <div>
                         <div class="flex items-center justify-between mb-3">
-                            <span class="text-xs font-bold px-2.5 py-1 rounded-lg bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">Opção ${item.id}</span>
-                            <span class="text-xs text-slate-500">${item.tag}</span>
+                            <span class="text-xs font-bold px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 border border-slate-700">Opção ${item.id}</span>
+                            <span class="text-xs text-slate-400">${item.tag}</span>
                         </div>
                         <h3 class="font-bold text-base text-white group-hover:text-emerald-300 transition-colors mb-3">${item.title}</h3>
                         <ul class="space-y-1.5 text-sm text-slate-300">
                             ${ingredientsList}
                         </ul>
                     </div>
-                    ${prepHtml}
+                    <div>
+                        ${prepHtml}
+                        <div class="mt-5 pt-4 border-t border-slate-800/80 flex items-center justify-between">
+                            <span class="text-xs text-slate-400 select-status">${isSelected ? '✅ Selecionado' : 'Disponível'}</span>
+                            <button onclick="toggleSelect('${uniqueId}', '${item.tag}', '${item.title.replace(/'/g, "\\'")}', ${JSON.stringify(item.ingredients).replace(/"/g, '&quot;')})" 
+                                class="select-btn px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${isSelected ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-900/30' : 'bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white'}">
+                                <i class="fa-solid ${isSelected ? 'fa-check' : 'fa-plus'}"></i>
+                                <span>${isSelected ? 'Selecionado' : 'Selecionar'}</span>
+                            </button>
+                        </div>
+                    </div>
                 `;
                 container.appendChild(card);
             });
+        }
+
+        function openFruitsModal(multiplier, titleText) {
+            const modal = document.getElementById('fruits-modal');
+            const titleEl = document.getElementById('modal-title');
+            const tbody = document.getElementById('modal-table-body');
+
+            titleEl.innerHTML = `<i class="fa-solid fa-apple-whole text-emerald-400"></i> Frutas (${multiplier.replace('.', ',')} Porção${multiplier > 1 ? 'ões' : ''})`;
+            
+            const mult = parseFloat(multiplier);
+            tbody.innerHTML = substitutionFruitsBase.map(row => {
+                const calculatedQty = Math.round(row[1] * mult);
+                return `<tr class="hover:bg-slate-800/40"><td class="px-4 py-2.5">${row[0]}</td><td class="px-4 py-2.5 font-semibold text-emerald-400">${calculatedQty}g</td></tr>`;
+            }).join('');
+
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeFruitsModal() {
+            const modal = document.getElementById('fruits-modal');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }
+
+        function toggleSelect(uniqueId, tag, title, ingredients) {
+            if (selectedMeals.has(uniqueId)) {
+                selectedMeals.delete(uniqueId);
+            } else {
+                selectedMeals.add(uniqueId);
+            }
+            renderCards(breakfastData, 'breakfast-grid', 'breakfast');
+            renderCards(lunchData, 'lunch-grid', 'lunch');
+            updateActionBar();
+        }
+
+        function updateActionBar() {
+            const bar = document.getElementById('selection-bar');
+            const countEl = document.getElementById('selected-count');
+            countEl.textContent = selectedMeals.size;
+
+            if (selectedMeals.size > 0) {
+                bar.classList.remove('translate-y-full');
+            } else {
+                bar.classList.add('translate-y-full');
+            }
+        }
+
+        function clearSelection() {
+            selectedMeals.clear();
+            renderCards(breakfastData, 'breakfast-grid', 'breakfast');
+            renderCards(lunchData, 'lunch-grid', 'lunch');
+            updateActionBar();
+        }
+
+        function getFormattedText() {
+            let text = "";
+            selectedMeals.forEach(uniqueId => {
+                let [cat, idStr] = uniqueId.split('-');
+                let id = parseInt(idStr);
+                let item = cat.trim() === 'breakfast' ? breakfastData.find(b => b.id === id) : lunchData.find(l => l.id === id);
+                
+                if (item) {
+                    text += `-> ${item.tag}\n${item.title}\n`;
+                    item.ingredients.forEach(ing => {
+                        text += `- ${ing}\n`;
+                    });
+                    text += "________\n\n";
+                }
+            });
+            return text.trim();
+        }
+
+        function copyFormattedText() {
+            const text = getFormattedText();
+            navigator.clipboard.writeText(text).then(() => {
+                alert('Cardápio copiado para a área de transferência com sucesso!');
+            });
+        }
+
+        function sendWhatsApp() {
+            const text = getFormattedText();
+            const encoded = encodeURIComponent(text);
+            window.open(`https://api.whatsapp.com/send?text=${encoded}`, '_blank');
         }
 
         function renderTables() {
@@ -643,8 +850,8 @@
                 <tr class="hover:bg-slate-800/40"><td class="px-4 py-2.5">${row[0]}</td><td class="px-4 py-2.5 font-semibold text-emerald-400">${row[1]}</td></tr>
             `).join('');
 
-            document.getElementById('table-fruits').innerHTML = substitutionFruits.map(row => `
-                <tr class="hover:bg-slate-800/40"><td class="px-4 py-2.5">${row[0]}</td><td class="px-4 py-2.5 font-semibold text-emerald-400">${row[1]}</td></tr>
+            document.getElementById('table-fruits').innerHTML = substitutionFruitsBase.map(row => `
+                <tr class="hover:bg-slate-800/40"><td class="px-4 py-2.5">${row[0]}</td><td class="px-4 py-2.5 font-semibold text-emerald-400">${row[1]}g</td></tr>
             `).join('');
 
             document.getElementById('table-juices').innerHTML = substitutionJuices.map(row => `
@@ -670,10 +877,10 @@
 
         // Initial load
         window.onload = function() {
-            renderCards(breakfastData, 'breakfast-grid');
-            renderCards(lunchData, 'lunch-grid');
+            renderCards(breakfastData, 'breakfast-grid', 'breakfast');
+            renderCards(lunchData, 'lunch-grid', 'lunch');
             renderTables();
-            switchTab('home'); // Abre na tela inicial por padrão
+            switchTab('home');
         };
     </script>
 </body>
