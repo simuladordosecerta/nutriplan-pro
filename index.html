@@ -31,53 +31,56 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body { font-family: 'Inter', sans-serif; }
+        /* Esconder barra de rolagem horizontal mantendo funcionalidade */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-emerald-500 selection:text-white pb-24">
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col selection:bg-emerald-500 selection:text-white pb-28">
 
     <!-- Top Header / Dashboard Navbar -->
-    <header class="sticky top-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-800">
+    <header class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-slate-800 shadow-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
             <div class="flex items-center space-x-3">
                 <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-600 to-teal-400 flex items-center justify-center shadow-lg shadow-emerald-900/30">
                     <i class="fa-solid fa-utensils text-white text-lg"></i>
                 </div>
                 <div>
-                    <h1 class="font-bold text-lg tracking-tight bg-gradient-to-r from-emerald-400 to-teal-200 bg-clip-text text-transparent">NutriPlan Pro</h1>
-                    <p class="text-xs text-slate-400">Cardápio Inteligente & Substituições</p>
+                    <h1 class="font-bold text-base sm:text-lg tracking-tight bg-gradient-to-r from-emerald-400 to-teal-200 bg-clip-text text-transparent">NutriPlan Pro</h1>
+                    <p class="text-[11px] text-slate-400">Cardápio Inteligente & Substituições</p>
                 </div>
             </div>
 
             <!-- Status -->
             <div class="flex items-center space-x-3">
-                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
-                    <span class="w-2 h-2 rounded-full bg-emerald-400 mr-2 animate-pulse"></span>
-                    Ativo & Atualizado
+                <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 mr-1.5 animate-pulse"></span>
+                    Ativo
                 </span>
             </div>
         </div>
     </header>
 
-    <!-- Main Navigation Tabs -->
-    <nav class="bg-slate-900/50 border-b border-slate-800 sticky top-16 z-40 backdrop-blur-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex space-x-2 sm:space-x-4 overflow-x-auto py-3 no-scrollbar">
-            <button onclick="switchTab('breakfast')" id="btn-breakfast" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white">
+    <!-- Main Navigation Tabs (Mobile Optimized Scroll) -->
+    <nav class="bg-slate-900/70 border-b border-slate-800 sticky top-16 z-40 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 flex space-x-2 overflow-x-auto py-3.5 no-scrollbar">
+            <button onclick="switchTab('breakfast')" id="btn-breakfast" class="tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white">
                 <i class="fa-solid fa-mug-hot"></i>
                 <span>Café & Lanche (36)</span>
             </button>
-            <button onclick="switchTab('lunch')" id="btn-lunch" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white">
+            <button onclick="switchTab('lunch')" id="btn-lunch" class="tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white">
                 <i class="fa-solid fa-bowl-food"></i>
                 <span>Almoço & Jantar (17)</span>
             </button>
-            <button onclick="switchTab('fast-snacks')" id="btn-fast-snacks" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white">
+            <button onclick="switchTab('fast-snacks')" id="btn-fast-snacks" class="tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white">
                 <i class="fa-solid fa-pen-nib text-amber-400"></i>
                 <span>Dicas Canetinha</span>
             </button>
-            <button onclick="switchTab('substitutions')" id="btn-substitutions" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white">
+            <button onclick="switchTab('substitutions')" id="btn-substitutions" class="tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white">
                 <i class="fa-solid fa-arrows-rotate"></i>
-                <span>Tabelas de Substituição</span>
+                <span>Substituições</span>
             </button>
-            <button onclick="switchTab('home')" id="btn-home" class="tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all flex items-center space-x-2 whitespace-nowrap bg-emerald-600 text-white shadow-lg shadow-emerald-900/40">
+            <button onclick="switchTab('home')" id="btn-home" class="tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center space-x-2 whitespace-nowrap bg-emerald-600 text-white shadow-lg shadow-emerald-900/40">
                 <i class="fa-solid fa-house"></i>
                 <span>Início</span>
             </button>
@@ -85,31 +88,31 @@
     </nav>
 
     <!-- Main Content Container -->
-    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
 
         <!-- TELA INICIAL / BOAS-VINDAS -->
-        <section id="tab-home" class="tab-content space-y-6 text-center py-12">
-            <div class="max-w-2xl mx-auto space-y-4 bg-slate-900 border border-slate-800 p-8 rounded-3xl shadow-2xl">
-                <div class="w-16 h-16 bg-emerald-500/10 text-emerald-400 rounded-2xl flex items-center justify-center mx-auto text-2xl border border-emerald-500/20">
+        <section id="tab-home" class="tab-content space-y-6 text-center py-6 sm:py-12">
+            <div class="max-w-2xl mx-auto space-y-4 bg-slate-900 border border-slate-800 p-6 sm:p-8 rounded-3xl shadow-2xl">
+                <div class="w-16 h-16 bg-emerald-500/10 text-emerald-400 rounded-2xl flex items-center justify-center mx-auto text-2xl border border-emerald-500/25 shadow-inner">
                     <i class="fa-solid fa-utensils"></i>
                 </div>
-                <h2 class="text-3xl font-bold tracking-tight text-white">Bem-vindo ao NutriPlan Pro</h2>
-                <p class="text-slate-400 text-sm leading-relaxed">
-                    Selecione uma das categorias no menu acima para abrir os cardápios de Café & Lanche, Almoço & Jantar, conferir as Dicas Canetinha ou consultar as Tabelas de Substituição. Você pode selecionar refeições para gerar seu plano personalizado.
+                <h2 class="text-2xl sm:text-3xl font-bold tracking-tight text-white">Bem-vindo ao NutriPlan Pro</h2>
+                <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
+                    Selecione uma das categorias no menu acima para abrir os cardápios de Café & Lanche, Almoço & Jantar, conferir as Dicas Canetinha ou consultar as Tabelas de Substituição. Toque em <strong class="text-emerald-400">"Selecionar"</strong> nas refeições desejadas para gerar e enviar seu plano personalizado!
                 </p>
             </div>
 
-            <div class="max-w-2xl mx-auto space-y-4 bg-slate-900 border border-slate-800 p-8 rounded-3xl shadow-2xl text-left">
-                <h3 class="text-xl font-bold text-emerald-400 flex items-center gap-2">
+            <div class="max-w-2xl mx-auto space-y-4 bg-slate-900 border border-slate-800 p-6 sm:p-8 rounded-3xl shadow-2xl text-left">
+                <h3 class="text-lg sm:text-xl font-bold text-emerald-400 flex items-center gap-2">
                     <span>💚</span> NutriPlan Pro - Alimentação inteligente para todos!
                 </h3>
-                <p class="text-slate-300 text-sm leading-relaxed">
+                <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
                     Este site é gratuito e foi criado para ajudar você a organizar sua alimentação de forma prática, acessível e inteligente. Aqui você encontra sugestões de cardápios, opções de substituição de alimentos e dicas para facilitar sua rotina alimentar.
                 </p>
-                <p class="text-slate-300 text-sm leading-relaxed">
+                <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
                     Nosso objetivo é compartilhar conhecimento, simplificar escolhas e ajudar mais pessoas a terem uma relação melhor com a alimentação. Tudo isso de forma gratuita, porque acreditamos que a informação deve estar ao alcance de todos!
                 </p>
-                <p class="text-slate-300 text-sm font-medium pt-2 border-t border-slate-800 flex items-center justify-between">
+                <p class="text-slate-300 text-xs sm:text-sm font-medium pt-3 border-t border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
                     <span>Aproveite, explore e compartilhe! Sua saúde merece atenção.</span>
                     <span class="text-xl">🥗</span>
                 </p>
@@ -118,59 +121,59 @@
 
         <!-- TAB 1: CAFÉ DA MANHÃ E LANCHE DA TARDE -->
         <section id="tab-breakfast" class="tab-content space-y-6 hidden">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-gradient-to-r from-slate-900 to-slate-900/60 p-6 rounded-2xl border border-slate-800">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-gradient-to-r from-slate-900 to-slate-900/60 p-5 sm:p-6 rounded-2xl border border-slate-800 shadow-lg">
                 <div>
-                    <h2 class="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+                    <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-white flex items-center gap-2">
                         <i class="fa-solid fa-sun text-amber-400"></i> Café da Manhã e Lanche da Tarde
                     </h2>
-                    <p class="text-slate-400 text-sm mt-1">36 opções versáteis que podem ser utilizadas tanto no café da manhã quanto no lanche da tarde.</p>
+                    <p class="text-slate-400 text-xs sm:text-sm mt-1">36 opções versáteis que podem ser utilizadas tanto no café da manhã quanto no lanche da tarde.</p>
                 </div>
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-2 self-start sm:self-auto">
                     <span class="px-3 py-1 rounded-lg bg-slate-800 text-xs font-medium text-slate-300 border border-slate-700">Páginas 3 a 12</span>
                 </div>
             </div>
 
-            <div id="breakfast-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            <div id="breakfast-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
         </section>
 
         <!-- TAB 2: ALMOÇO E JANTAR -->
         <section id="tab-lunch" class="tab-content space-y-6 hidden">
-            <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 bg-gradient-to-r from-slate-900 to-slate-900/60 p-6 rounded-2xl border border-slate-800">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-gradient-to-r from-slate-900 to-slate-900/60 p-5 sm:p-6 rounded-2xl border border-slate-800 shadow-lg">
                 <div>
-                    <h2 class="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+                    <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-white flex items-center gap-2">
                         <i class="fa-solid fa-moon text-indigo-400"></i> Almoço e Jantar
                     </h2>
-                    <p class="text-slate-400 text-sm mt-1">17 opções completas e equilibradas para as principais refeições do dia.</p>
+                    <p class="text-slate-400 text-xs sm:text-sm mt-1">17 opções completas e equilibradas para as principais refeições do dia.</p>
                 </div>
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-2 self-start sm:self-auto">
                     <span class="px-3 py-1 rounded-lg bg-slate-800 text-xs font-medium text-slate-300 border border-slate-700">Páginas 13 a 16</span>
                 </div>
             </div>
 
-            <div id="lunch-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+            <div id="lunch-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"></div>
         </section>
 
         <!-- TAB 3: DICAS CANETINHA -->
         <section id="tab-fast-snacks" class="tab-content space-y-6 hidden">
-            <div class="bg-gradient-to-r from-slate-900 to-slate-900/60 p-6 rounded-2xl border border-slate-800">
-                <h2 class="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+            <div class="bg-gradient-to-r from-slate-900 to-slate-900/60 p-5 sm:p-6 rounded-2xl border border-slate-800 shadow-lg">
+                <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-white flex items-center gap-2">
                     <i class="fa-solid fa-pen-nib text-amber-400"></i> Protocolo Nutricional & Dicas Canetinha
                 </h2>
-                <p class="text-slate-400 text-sm mt-1">O passo a passo completo do porquê a nutrição importa até quando ajustar a dose.</p>
+                <p class="text-slate-400 text-xs sm:text-sm mt-1">O passo a passo completo do porquê a nutrição importa até quando ajustar a dose.</p>
             </div>
 
             <div class="space-y-6">
                 <!-- 1. Como a caneta age -->
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
-                    <h3 class="text-xl font-bold text-white flex items-center gap-2 text-emerald-400">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl space-y-4">
+                    <h3 class="text-lg sm:text-xl font-bold text-white flex items-center gap-2 text-emerald-400">
                         <i class="fa-solid fa-syringe"></i> 1. Como a Caneta Age
                     </h3>
-                    <p class="text-slate-300 text-sm leading-relaxed">
+                    <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
                         As canetas GLP-1 agem nos receptores do hormônio GLP-1 (algumas também no GIP), o que significa: mais saciedade 🙌, esvaziamento gástrico lento 🐢, controle da fome 🍽️, diminuição da fome física e emocional 🧠, redução da velocidade de digestão, possível alteração da motilidade intestinal, melhoria do controle glicêmico 📉 e déficit calórico espontâneo mas também risco de colaterais gastrointestinais ⚠️.
                     </p>
                     <div class="bg-slate-950 p-4 rounded-xl border border-slate-800">
                         <p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Por isso o foco nutricional deve ser:</p>
-                        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-slate-300">
+                        <ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs sm:text-sm text-slate-300">
                             <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>🥩 Alta proteína</li>
                             <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>🍽️ Digestibilidade</li>
                             <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>⏰ Fracionamento das refeições</li>
@@ -181,25 +184,25 @@
                 </div>
 
                 <!-- 2. Quanto de proteína você precisa -->
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
-                    <h3 class="text-xl font-bold text-white flex items-center gap-2 text-emerald-400">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl space-y-4">
+                    <h3 class="text-lg sm:text-xl font-bold text-white flex items-center gap-2 text-emerald-400">
                         <i class="fa-solid fa-drumstick-bite"></i> 2. Quanto de Proteína Você Precisa
                     </h3>
-                    <p class="text-slate-300 text-sm leading-relaxed">
+                    <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
                         A recomendação geral para quem usa caneta GLP-1 é <strong>1,8 a 2 g de proteína por kg de peso</strong> para preservar massa muscular 💪, controlar a fome 🍽️, acelerar recuperação muscular 🔄 e manter o metabolismo ativo 🔥 (em pessoas com IMC até 30).
                     </p>
-                    <p class="text-slate-300 text-sm leading-relaxed">
+                    <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
                         Se o seu IMC for 30 ou mais, calcular pelo peso atual pode superestimar bastante sua necessidade proteica, já que o excesso de gordura não precisa de proteína para ser mantido, por isso usamos o peso ajustado ⚖️.
                     </p>
                 </div>
 
                 <!-- 3. Hidratação diária -->
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
-                    <h3 class="text-xl font-bold text-white flex items-center gap-2 text-cyan-400">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl space-y-4">
+                    <h3 class="text-lg sm:text-xl font-bold text-white flex items-center gap-2 text-cyan-400">
                         <i class="fa-solid fa-droplet"></i> 3. Hidratação Diária
                     </h3>
-                    <p class="text-slate-300 text-sm font-medium text-emerald-400">Hidratação correta = menos colaterais + mais resultado.</p>
-                    <p class="text-slate-300 text-sm">Multiplique o seu peso por <strong>30 a 40 ml</strong> para achar a sua meta diária.</p>
+                    <p class="text-slate-300 text-xs sm:text-sm font-medium text-emerald-400">Hidratação correta = menos colaterais + mais resultado.</p>
+                    <p class="text-slate-300 text-xs sm:text-sm">Multiplique o seu peso por <strong>30 a 40 ml</strong> para achar a sua meta diária.</p>
                     <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 text-xs text-slate-300 space-y-1">
                         <p class="font-bold text-slate-200">Exemplos:</p>
                         <p>90 x 30 = 2.700 litros</p>
@@ -227,39 +230,39 @@
                 </div>
 
                 <!-- 4. Como potenciar a resposta -->
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
-                    <h3 class="text-xl font-bold text-white flex items-center gap-2 text-emerald-400">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl space-y-4">
+                    <h3 class="text-lg sm:text-xl font-bold text-white flex items-center gap-2 text-emerald-400">
                         <i class="fa-solid fa-rocket"></i> 4. Como Potenciar a Resposta ao Medicamento
                     </h3>
-                    <p class="text-slate-300 text-sm leading-relaxed">
+                    <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
                         A caneta não faz milagre sozinha; ela cria um ambiente hormonal favorável, mas o resultado real depende de como o corpo é conduzido. Estes são os <strong>cinco pilares inegociáveis</strong>:
                     </p>
-                    <div class="space-y-3 text-sm text-slate-300">
-                        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                    <div class="space-y-3 text-xs sm:text-sm text-slate-300">
+                        <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
                             <strong class="text-emerald-400">1. 💪 Massa muscular:</strong> sem estímulo adequado, o corpo perde gordura e músculo em conjunto. O treino de força não é opcional: faça de 3 a 5 vezes por semana, consuma hidratos de carbono antes de treinar (para mais energia) e movimente-se todos os dias para melhorar a sensibilidade à insulina.
                         </div>
-                        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                        <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
                             <strong class="text-emerald-400">2. 😴 Sono:</strong> dormir mal piora a resistência à insulina, aumenta a inflamação, reduz a preservação muscular e diminui a eficácia metabólica da caneta. Um sono regulado potencializa o emagrecimento e reduz os efeitos colaterais.
                         </div>
-                        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                        <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
                             <strong class="text-emerald-400">3. 🌱 Intestino regulado:</strong> quando o intestino não funciona bem, há mais inflamação, pior absorção de nutrientes e mais desconforto. Ajuste as fibras, beba água suficiente e mantenha uma rotina alimentar previsível.
                         </div>
-                        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                        <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
                             <strong class="text-emerald-400">4. ⌛ Respeitar o tempo de adaptação:</strong> nem toda a semana precisa de um ajuste de dose. Subir a dose sem necessidade apenas aumenta os efeitos colaterais; mais dose não é igual a mais resultado.
                         </div>
-                        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800">
+                        <div class="bg-slate-950 p-3.5 rounded-xl border border-slate-800">
                             <strong class="text-emerald-400">5. 🧘 Gerenciar o stresse:</strong> o stresse crónico mantém o cortisol elevado, o que dificulta a mobilização de gordura, favorece a retenção hídrica e piora a resistência à insulina. Tenha uma rotina mínima de desaceleração diária e pausas reais entre tarefas.
                         </div>
                     </div>
                 </div>
 
                 <!-- 5. Quando ajustar a dose -->
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-4">
-                    <h3 class="text-xl font-bold text-white flex items-center gap-2 text-amber-400">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl space-y-4">
+                    <h3 class="text-lg sm:text-xl font-bold text-white flex items-center gap-2 text-amber-400">
                         <i class="fa-solid fa-scale-balanced"></i> 5. Quando Ajustar a Dose
                     </h3>
-                    <p class="text-slate-300 text-sm leading-relaxed">Ajuste a dose apenas se, ao mesmo tempo:</p>
-                    <ul class="space-y-2 text-sm text-slate-300">
+                    <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">Ajuste a dose apenas se, ao mesmo tempo:</p>
+                    <ul class="space-y-2 text-xs sm:text-sm text-slate-300">
                         <li class="flex items-center gap-2">🍽️ O apetite continua alto.</li>
                         <li class="flex items-center gap-2">⏸️ A perda de peso estagnou por 4–6 semanas.</li>
                         <li class="flex items-center gap-2">✅ Você está sem colaterais fortes.</li>
@@ -268,20 +271,20 @@
                 </div>
 
                 <!-- Cardápio Ideal em Uso de Canetas -->
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl space-y-6">
-                    <h3 class="text-xl font-bold text-white flex items-center gap-2 text-emerald-400">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl space-y-6">
+                    <h3 class="text-lg sm:text-xl font-bold text-white flex items-center gap-2 text-emerald-400">
                         <i class="fa-solid fa-utensils"></i> Cardápio Ideal em Uso de Canetas
                     </h3>
-                    <p class="text-slate-300 text-sm leading-relaxed">
+                    <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">
                         Base de 130g de proteína/dia, ideal para preservar massa muscular durante o uso da caneta. Pense no cardápio como blocos: cada refeição contém 1 fonte de proteína (obrigatória) + 1 carboidrato (conforme fome) + fibras/vegetais sempre que possível. O peso indicado é sempre do alimento pronto, nunca cru, use a balança de cozinha.
                     </p>
 
                     <div class="space-y-4 pt-2">
-                        <h4 class="font-bold text-white text-base border-b border-slate-800 pb-2">Sugestões de Alimentação</h4>
+                        <h4 class="font-bold text-white text-sm sm:text-base border-b border-slate-800 pb-2">Sugestões de Alimentação</h4>
                         
                         <!-- Café da manhã -->
                         <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
-                            <h5 class="font-semibold text-amber-400 text-sm">☀️ Café da Manhã</h5>
+                            <h5 class="font-semibold text-amber-400 text-xs sm:text-sm">☀️ Café da Manhã</h5>
                             <p class="text-xs font-bold text-slate-300">🍳 OPÇÃO 1</p>
                             <ul class="text-xs text-slate-300 space-y-1">
                                 <li>• Pão integral (1 fatia)</li>
@@ -294,7 +297,7 @@
 
                         <!-- Almoço -->
                         <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
-                            <h5 class="font-semibold text-indigo-400 text-sm">🍗 Almoço</h5>
+                            <h5 class="font-semibold text-indigo-400 text-xs sm:text-sm">🍗 Almoço</h5>
                             <ul class="text-xs text-slate-300 space-y-1">
                                 <li>• Peito de frango (120 g) ou tilápia</li>
                                 <li>• Arroz (80g) ou puré de batata inglesa (110g) ou puré de moranga (130g)</li>
@@ -304,7 +307,7 @@
 
                         <!-- Vegetais -->
                         <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-2">
-                            <h5 class="font-semibold text-emerald-400 text-sm">🥦 Vegetais</h5>
+                            <h5 class="font-semibold text-emerald-400 text-xs sm:text-sm">🥦 Vegetais</h5>
                             <p class="text-xs text-slate-300"><strong>Priorize cozidos</strong> (melhor tolerância digestiva, crus fermentam mais e podem gerar gases/estufamento): brócolis, couve-flor, couve, cenoura, abobrinha, vagem, espinafre, repolho, beterraba, pimentão.</p>
                             <p class="text-xs text-slate-300 pt-1"><strong>Podem ser crus</strong> (leves, baixa fermentação): alface, tomate, pepino sem casca, rúcula, agrião, acelga.</p>
                             <p class="text-xs text-slate-400 pt-1"><em>Atenção individual:</em> cebola e alho (melhor cozidos), milho (porções pequenas), leguminosas como ervilha/lentilha/feijão (sempre bem cozidas).</p>
@@ -312,7 +315,7 @@
 
                         <!-- Lanche da tarde -->
                         <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-3">
-                            <h5 class="font-semibold text-amber-400 text-sm">🍎 Lanche da Tarde</h5>
+                            <h5 class="font-semibold text-amber-400 text-xs sm:text-sm">🍎 Lanche da Tarde</h5>
                             <div>
                                 <p class="text-xs font-bold text-slate-300">🥪 OPÇÃO 1 SANDUÍCHE DE FRANGO</p>
                                 <ul class="text-xs text-slate-300 space-y-1">
@@ -336,7 +339,7 @@
 
                         <!-- Jantar -->
                         <div class="bg-slate-950 p-4 rounded-xl border border-slate-800 space-y-3">
-                            <h5 class="font-semibold text-indigo-400 text-sm">🌙 Jantar</h5>
+                            <h5 class="font-semibold text-indigo-400 text-xs sm:text-sm">🌙 Jantar</h5>
                             <div>
                                 <p class="text-xs font-bold text-slate-300">OPÇÃO 1</p>
                                 <ul class="text-xs text-slate-300 space-y-1">
@@ -368,25 +371,25 @@
 
         <!-- TAB 4: TABELAS DE SUBSTITUIÇÕES -->
         <section id="tab-substitutions" class="tab-content space-y-8 hidden">
-            <div class="bg-gradient-to-r from-slate-900 to-slate-900/60 p-6 rounded-2xl border border-slate-800">
-                <h2 class="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+            <div class="bg-gradient-to-r from-slate-900 to-slate-900/60 p-5 sm:p-6 rounded-2xl border border-slate-800 shadow-lg">
+                <h2 class="text-xl sm:text-2xl font-bold tracking-tight text-white flex items-center gap-2">
                     <i class="fa-solid fa-scale-balanced text-emerald-400"></i> Guias e Tabelas de Substituição
                 </h2>
-                <p class="text-slate-400 text-sm mt-1">Consulte equivalências exatas de saladas, carnes, tubérculos, frutas e sucos para personalizar suas refeições.</p>
+                <p class="text-slate-400 text-xs sm:text-sm mt-1">Consulte equivalências exatas de saladas, carnes, tubérculos, frutas e sucos para personalizar suas refeições.</p>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 <!-- Saladas e Vegetais -->
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col">
-                    <h3 class="font-bold text-lg text-white flex items-center gap-2 mb-4">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl flex flex-col">
+                    <h3 class="font-bold text-base sm:text-lg text-white flex items-center gap-2 mb-4">
                         <i class="fa-solid fa-carrot text-orange-400"></i> Saladas e Vegetais
                     </h3>
                     <div class="overflow-x-auto flex-grow">
-                        <table class="w-full text-left text-sm text-slate-300">
-                            <thead class="bg-slate-800/50 text-slate-400 uppercase text-xs">
+                        <table class="w-full text-left text-xs sm:text-sm text-slate-300">
+                            <thead class="bg-slate-800/50 text-slate-400 uppercase text-[11px] sm:text-xs">
                                 <tr>
-                                    <th class="px-4 py-3 rounded-l-lg">Opção / Alimento</th>
-                                    <th class="px-4 py-3 rounded-r-lg">Quantidade</th>
+                                    <th class="px-3 sm:px-4 py-2.5 rounded-l-lg">Opção / Alimento</th>
+                                    <th class="px-3 sm:px-4 py-2.5 rounded-r-lg">Quantidade</th>
                                 </tr>
                             </thead>
                             <tbody id="table-salads" class="divide-y divide-slate-800"></tbody>
@@ -395,17 +398,17 @@
                 </div>
 
                 <!-- Carnes -->
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col">
-                    <h3 class="font-bold text-lg text-white flex items-center gap-2 mb-4">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl flex flex-col">
+                    <h3 class="font-bold text-base sm:text-lg text-white flex items-center gap-2 mb-4">
                         <i class="fa-solid fa-drumstick-bite text-red-400"></i> Substituições de Carnes (Base: 100g)
                     </h3>
                     <div class="overflow-x-auto flex-grow">
-                        <table class="w-full text-left text-sm text-slate-300">
-                            <thead class="bg-slate-800/50 text-slate-400 uppercase text-xs">
+                        <table class="w-full text-left text-xs sm:text-sm text-slate-300">
+                            <thead class="bg-slate-800/50 text-slate-400 uppercase text-[11px] sm:text-xs">
                                 <tr>
-                                    <th class="px-4 py-3 rounded-l-lg">Categoria</th>
-                                    <th class="px-4 py-3">Alimento</th>
-                                    <th class="px-4 py-3 rounded-r-lg">Equivalente</th>
+                                    <th class="px-3 sm:px-4 py-2.5 rounded-l-lg">Categoria</th>
+                                    <th class="px-3 sm:px-4 py-2.5">Alimento</th>
+                                    <th class="px-3 sm:px-4 py-2.5 rounded-r-lg">Equivalente</th>
                                 </tr>
                             </thead>
                             <tbody id="table-meats" class="divide-y divide-slate-800"></tbody>
@@ -414,16 +417,16 @@
                 </div>
 
                 <!-- Tubérculos -->
-                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col">
-                    <h3 class="font-bold text-lg text-white flex items-center gap-2 mb-4">
+                <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl flex flex-col">
+                    <h3 class="font-bold text-base sm:text-lg text-white flex items-center gap-2 mb-4">
                         <i class="fa-solid fa-seedling text-amber-500"></i> Tubérculos (1 Porção)
                     </h3>
                     <div class="overflow-x-auto flex-grow">
-                        <table class="w-full text-left text-sm text-slate-300">
-                            <thead class="bg-slate-800/50 text-slate-400 uppercase text-xs">
+                        <table class="w-full text-left text-xs sm:text-sm text-slate-300">
+                            <thead class="bg-slate-800/50 text-slate-400 uppercase text-[11px] sm:text-xs">
                                 <tr>
-                                    <th class="px-4 py-3 rounded-l-lg">Alimento</th>
-                                    <th class="px-4 py-3 rounded-r-lg">Quantidade Cozida</th>
+                                    <th class="px-3 sm:px-4 py-2.5 rounded-l-lg">Alimento</th>
+                                    <th class="px-3 sm:px-4 py-2.5 rounded-r-lg">Quantidade Cozida</th>
                                 </tr>
                             </thead>
                             <tbody id="table-tubers" class="divide-y divide-slate-800"></tbody>
@@ -432,17 +435,17 @@
                 </div>
 
                 <!-- Frutas e Sucos -->
-                <div class="space-y-8 flex flex-col">
-                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col">
-                        <h3 class="font-bold text-lg text-white flex items-center gap-2 mb-4">
+                <div class="space-y-6 flex flex-col">
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl flex flex-col">
+                        <h3 class="font-bold text-base sm:text-lg text-white flex items-center gap-2 mb-4">
                             <i class="fa-solid fa-apple-whole text-emerald-400"></i> Frutas (1 Porção)
                         </h3>
                         <div class="overflow-x-auto max-h-72 overflow-y-auto">
-                            <table class="w-full text-left text-sm text-slate-300">
-                                <thead class="bg-slate-800/50 text-slate-400 uppercase text-xs sticky top-0 bg-slate-900">
+                            <table class="w-full text-left text-xs sm:text-sm text-slate-300">
+                                <thead class="bg-slate-800/50 text-slate-400 uppercase text-[11px] sm:text-xs sticky top-0 bg-slate-900">
                                     <tr>
-                                        <th class="px-4 py-3 rounded-l-lg">Fruta</th>
-                                        <th class="px-4 py-3 rounded-r-lg">Quantidade</th>
+                                        <th class="px-3 sm:px-4 py-2.5 rounded-l-lg">Fruta</th>
+                                        <th class="px-3 sm:px-4 py-2.5 rounded-r-lg">Quantidade</th>
                                     </tr>
                                 </thead>
                                 <tbody id="table-fruits" class="divide-y divide-slate-800"></tbody>
@@ -450,16 +453,16 @@
                         </div>
                     </div>
 
-                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-xl flex flex-col">
-                        <h3 class="font-bold text-lg text-white flex items-center gap-2 mb-4">
+                    <div class="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6 shadow-xl flex flex-col">
+                        <h3 class="font-bold text-base sm:text-lg text-white flex items-center gap-2 mb-4">
                             <i class="fa-solid fa-glass-water text-cyan-400"></i> Substituição de Frutas por Sucos
                         </h3>
                         <div class="overflow-x-auto">
-                            <table class="w-full text-left text-sm text-slate-300">
-                                <thead class="bg-slate-800/50 text-slate-400 uppercase text-xs">
+                            <table class="w-full text-left text-xs sm:text-sm text-slate-300">
+                                <thead class="bg-slate-800/50 text-slate-400 uppercase text-[11px] sm:text-xs">
                                     <tr>
-                                        <th class="px-4 py-3 rounded-l-lg">Suco / Polpa</th>
-                                        <th class="px-4 py-3 rounded-r-lg">Equivalência</th>
+                                        <th class="px-3 sm:px-4 py-2.5 rounded-l-lg">Suco / Polpa</th>
+                                        <th class="px-3 sm:px-4 py-2.5 rounded-r-lg">Equivalência</th>
                                     </tr>
                                 </thead>
                                 <tbody id="table-juices" class="divide-y divide-slate-800"></tbody>
@@ -472,57 +475,63 @@
 
     </main>
 
-    <!-- Modal de Frutas -->
-    <div id="fruits-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-4">
-        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-6 shadow-2xl relative space-y-4 animate-in fade-in zoom-in duration-200">
+    <!-- Modal de Frutas (Mobile Friendly) -->
+    <div id="fruits-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden items-center justify-center p-3 sm:p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl max-w-lg w-full p-5 sm:p-6 shadow-2xl relative space-y-4 animate-in fade-in zoom-in duration-200">
             <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-                <h3 id="modal-title" class="font-bold text-lg text-white flex items-center gap-2">
+                <h3 id="modal-title" class="font-bold text-base sm:text-lg text-white flex items-center gap-2">
                     <i class="fa-solid fa-apple-whole text-emerald-400"></i> Opções de Frutas
                 </h3>
-                <button onclick="closeFruitsModal()" class="w-8 h-8 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition-all">
-                    <i class="fa-solid fa-xmark"></i>
+                <button onclick="closeFruitsModal()" class="w-9 h-9 rounded-full bg-slate-800 text-slate-400 hover:text-white flex items-center justify-center transition-all">
+                    <i class="fa-solid fa-xmark text-base"></i>
                 </button>
             </div>
-            <div class="overflow-y-auto max-h-[60vh] pr-1">
-                <table class="w-full text-left text-sm text-slate-300">
-                    <thead class="bg-slate-800/50 text-slate-400 uppercase text-xs sticky top-0 bg-slate-900">
+            <div class="overflow-y-auto max-h-[55vh] pr-1">
+                <table class="w-full text-left text-xs sm:text-sm text-slate-300">
+                    <thead class="bg-slate-800/50 text-slate-400 uppercase text-[11px] sm:text-xs sticky top-0 bg-slate-900">
                         <tr>
-                            <th class="px-4 py-2.5 rounded-l-lg">Fruta</th>
-                            <th class="px-4 py-2.5 rounded-r-lg">Quantidade</th>
+                            <th class="px-3 sm:px-4 py-2.5 rounded-l-lg">Fruta</th>
+                            <th class="px-3 sm:px-4 py-2.5 rounded-r-lg">Quantidade</th>
                         </tr>
                     </thead>
                     <tbody id="modal-table-body" class="divide-y divide-slate-800"></tbody>
                 </table>
             </div>
             <div class="pt-2 border-t border-slate-800 flex justify-end">
-                <button onclick="closeFruitsModal()" class="px-4 py-2 rounded-xl text-xs font-semibold bg-emerald-600 text-white hover:bg-emerald-500 transition-all">
+                <button onclick="closeFruitsModal()" class="w-full sm:w-auto px-5 py-2.5 rounded-xl text-xs sm:text-sm font-semibold bg-emerald-600 text-white hover:bg-emerald-500 transition-all">
                     Fechar
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Floating Selection Action Bar -->
-    <div id="selection-bar" class="fixed bottom-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur-md border-t border-slate-800 p-4 shadow-2xl transform translate-y-full transition-transform duration-300">
-        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div class="flex items-center space-x-3">
-                <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold border border-emerald-500/30">
-                    <span id="selected-count">0</span>
+    <!-- Floating Selection Action Bar (Mobile Responsive Stack) -->
+    <div id="selection-bar" class="fixed bottom-0 left-0 right-0 z-50 bg-slate-900/95 backdrop-blur-md border-t border-slate-800 p-3.5 sm:p-4 shadow-2xl transform translate-y-full transition-transform duration-300">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+            <div class="flex items-center space-x-3 w-full sm:w-auto justify-between sm:justify-start">
+                <div class="flex items-center space-x-2.5">
+                    <div class="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-sm border border-emerald-500/30">
+                        <span id="selected-count">0</span>
+                    </div>
+                    <div>
+                        <p class="font-bold text-xs sm:text-sm text-white">Refeições Selecionadas</p>
+                        <p class="text-[11px] text-slate-400">Pronto para copiar ou enviar</p>
+                    </div>
                 </div>
-                <div>
-                    <p class="font-bold text-sm text-white">Refeições Selecionadas</p>
-                    <p class="text-xs text-slate-400">Pronto para copiar ou enviar via WhatsApp</p>
-                </div>
+                <button onclick="clearSelection()" class="sm:hidden px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700">
+                    Limpar
+                </button>
             </div>
-            <div class="flex items-center space-x-3 w-full sm:w-auto justify-end">
-                <button onclick="clearSelection()" class="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all">
+            
+            <div class="flex items-center space-x-2 w-full sm:w-auto justify-end">
+                <button onclick="clearSelection()" class="hidden sm:inline-block px-3.5 py-2 rounded-xl text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition-all">
                     Limpar Seleção
                 </button>
-                <button onclick="copyFormattedText()" class="px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800 text-emerald-400 border border-emerald-500/30 hover:bg-slate-700 transition-all flex items-center gap-2">
-                    <i class="fa-solid fa-copy"></i> Copiar Texto
+                <button onclick="copyFormattedText()" class="flex-1 sm:flex-none px-3.5 py-2.5 rounded-xl text-xs font-semibold bg-slate-800 text-emerald-400 border border-emerald-500/30 hover:bg-slate-700 transition-all flex items-center justify-center gap-1.5">
+                    <i class="fa-solid fa-copy"></i> <span>Copiar</span>
                 </button>
-                <button onclick="sendWhatsApp()" class="px-5 py-2 rounded-xl text-xs font-semibold bg-emerald-600 text-white hover:bg-emerald-500 shadow-lg shadow-emerald-900/40 transition-all flex items-center gap-2">
-                    <i class="fa-brands fa-whatsapp text-sm"></i> Enviar WhatsApp
+                <button onclick="sendWhatsApp()" class="flex-1 sm:flex-none px-4 py-2.5 rounded-xl text-xs font-semibold bg-emerald-600 text-white hover:bg-emerald-500 shadow-lg shadow-emerald-900/40 transition-all flex items-center justify-center gap-1.5">
+                    <i class="fa-brands fa-whatsapp text-sm"></i> <span>WhatsApp</span>
                 </button>
             </div>
         </div>
@@ -647,7 +656,6 @@
             ["Mandioca (aipim)", "40g"]
         ];
 
-        // Tabela base de 1 porção de fruta (em gramas base)
         const substitutionFruitsBase = [
             ["Melancia", 100], ["Melão", 100], ["Morango", 100], ["Jambo", 100],
             ["Acerola", 100], ["Pêssego", 90], ["Mexerica poncã", 80], ["Mamão papaia", 80],
@@ -669,7 +677,6 @@
             ["Maracujá natural (100g de polpa)", "1 porção"]
         ];
 
-        // Estado das seleções
         let selectedMeals = new Set();
 
         function renderCards(data, containerId, categoryKey) {
@@ -682,16 +689,14 @@
 
                 const card = document.createElement('div');
                 card.id = `card-${uniqueId}`;
-                card.className = `bg-slate-900 border rounded-2xl p-6 flex flex-col justify-between transition-all shadow-xl group ${isSelected ? 'border-emerald-500 ring-2 ring-emerald-500/20 bg-emerald-950/10' : 'border-slate-800 hover:border-slate-700'}`;
+                card.className = `bg-slate-900 border rounded-2xl p-5 sm:p-6 flex flex-col justify-between transition-all shadow-xl group ${isSelected ? 'border-emerald-500 ring-2 ring-emerald-500/25 bg-emerald-950/15' : 'border-slate-800 hover:border-slate-700'}`;
                 
-                // Processar ingredientes e adicionar botão "Ver Frutas" caso o ingrediente mencione fruta
                 let ingredientsList = "";
                 item.ingredients.forEach(ing => {
                     const lowerIng = ing.toLowerCase();
                     const hasFruit = lowerIng.includes("porção de fruta") || lowerIng.includes("fruta") || lowerIng.includes("frutas");
                     
                     if (hasFruit) {
-                        // Extrair multiplicador de porção se houver (ex: "2,5 porções de fruta" ou "1 porção de fruta")
                         let multiplier = 1;
                         const match = ing.match(/([\d,\.]+)\s*porç[õo]es?\s*de\s*fruta/i);
                         if (match) {
@@ -699,21 +704,21 @@
                         }
 
                         ingredientsList += `
-                            <li class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 py-1 border-t border-slate-800/50 mt-1">
+                            <li class="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 py-1.5 border-t border-slate-800/60 mt-1.5">
                                 <div class="flex items-start gap-2">
                                     <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-2 flex-shrink-0"></span>
-                                    <span>${ing}</span>
+                                    <span class="text-xs sm:text-sm">${ing}</span>
                                 </div>
-                                <button onclick="openFruitsModal('${multiplier}', '${ing.replace(/'/g, "\\'")}')" class="px-2.5 py-1 rounded-lg text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 transition-all flex items-center gap-1.5 self-start sm:self-auto">
+                                <button onclick="openFruitsModal('${multiplier}')" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-500/20 transition-all flex items-center justify-center gap-1.5">
                                     <i class="fa-solid fa-apple-whole"></i> Ver Frutas
                                 </button>
                             </li>
                         `;
                     } else {
                         ingredientsList += `
-                            <li class="flex items-start gap-2">
+                            <li class="flex items-start gap-2 py-0.5">
                                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 mt-2 flex-shrink-0"></span>
-                                <span>${ing}</span>
+                                <span class="text-xs sm:text-sm">${ing}</span>
                             </li>
                         `;
                     }
@@ -729,20 +734,20 @@
                 card.innerHTML = `
                     <div>
                         <div class="flex items-center justify-between mb-3">
-                            <span class="text-xs font-bold px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 border border-slate-700">Opção ${item.id}</span>
-                            <span class="text-xs text-slate-400">${item.tag}</span>
+                            <span class="text-[11px] sm:text-xs font-bold px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 border border-slate-700">Opção ${item.id}</span>
+                            <span class="text-[11px] sm:text-xs text-slate-400">${item.tag}</span>
                         </div>
-                        <h3 class="font-bold text-base text-white group-hover:text-emerald-300 transition-colors mb-3">${item.title}</h3>
-                        <ul class="space-y-1.5 text-sm text-slate-300">
+                        <h3 class="font-bold text-sm sm:text-base text-white group-hover:text-emerald-300 transition-colors mb-3">${item.title}</h3>
+                        <ul class="space-y-1.5 text-slate-300">
                             ${ingredientsList}
                         </ul>
                     </div>
                     <div>
                         ${prepHtml}
                         <div class="mt-5 pt-4 border-t border-slate-800/80 flex items-center justify-between">
-                            <span class="text-xs text-slate-400 select-status">${isSelected ? '✅ Selecionado' : 'Disponível'}</span>
-                            <button onclick="toggleSelect('${uniqueId}', '${item.tag}', '${item.title.replace(/'/g, "\\'")}', ${JSON.stringify(item.ingredients).replace(/"/g, '&quot;')})" 
-                                class="select-btn px-4 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${isSelected ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-900/30' : 'bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white'}">
+                            <span class="text-xs text-slate-400 font-medium select-status">${isSelected ? '✅ Selecionado' : 'Disponível'}</span>
+                            <button onclick="toggleSelect('${uniqueId}')" 
+                                class="select-btn px-4 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 ${isSelected ? 'bg-emerald-600 text-white shadow-lg shadow-emerald-900/40' : 'bg-slate-800 text-slate-200 hover:bg-slate-700 hover:text-white border border-slate-700'}">
                                 <i class="fa-solid ${isSelected ? 'fa-check' : 'fa-plus'}"></i>
                                 <span>${isSelected ? 'Selecionado' : 'Selecionar'}</span>
                             </button>
@@ -753,7 +758,7 @@
             });
         }
 
-        function openFruitsModal(multiplier, titleText) {
+        function openFruitsModal(multiplier) {
             const modal = document.getElementById('fruits-modal');
             const titleEl = document.getElementById('modal-title');
             const tbody = document.getElementById('modal-table-body');
@@ -763,7 +768,7 @@
             const mult = parseFloat(multiplier);
             tbody.innerHTML = substitutionFruitsBase.map(row => {
                 const calculatedQty = Math.round(row[1] * mult);
-                return `<tr class="hover:bg-slate-800/40"><td class="px-4 py-2.5">${row[0]}</td><td class="px-4 py-2.5 font-semibold text-emerald-400">${calculatedQty}g</td></tr>`;
+                return `<tr class="hover:bg-slate-800/40"><td class="px-3 sm:px-4 py-2.5">${row[0]}</td><td class="px-3 sm:px-4 py-2.5 font-semibold text-emerald-400">${calculatedQty}g</td></tr>`;
             }).join('');
 
             modal.classList.remove('hidden');
@@ -776,7 +781,7 @@
             modal.classList.add('hidden');
         }
 
-        function toggleSelect(uniqueId, tag, title, ingredients) {
+        function toggleSelect(uniqueId) {
             if (selectedMeals.has(uniqueId)) {
                 selectedMeals.delete(uniqueId);
             } else {
@@ -839,23 +844,23 @@
 
         function renderTables() {
             document.getElementById('table-salads').innerHTML = substitutionSalads.map(row => `
-                <tr class="hover:bg-slate-800/40"><td class="px-4 py-2.5">${row[0]}</td><td class="px-4 py-2.5 font-semibold text-emerald-400">${row[1]}</td></tr>
+                <tr class="hover:bg-slate-800/40"><td class="px-3 sm:px-4 py-2.5">${row[0]}</td><td class="px-3 sm:px-4 py-2.5 font-semibold text-emerald-400">${row[1]}</td></tr>
             `).join('');
 
             document.getElementById('table-meats').innerHTML = substitutionMeats.map(row => `
-                <tr class="hover:bg-slate-800/40"><td class="px-4 py-2.5 text-slate-400">${row[0]}</td><td class="px-4 py-2.5">${row[1]}</td><td class="px-4 py-2.5 font-semibold text-emerald-400">${row[2]}</td></tr>
+                <tr class="hover:bg-slate-800/40"><td class="px-3 sm:px-4 py-2.5 text-slate-400">${row[0]}</td><td class="px-3 sm:px-4 py-2.5">${row[1]}</td><td class="px-3 sm:px-4 py-2.5 font-semibold text-emerald-400">${row[2]}</td></tr>
             `).join('');
 
             document.getElementById('table-tubers').innerHTML = substitutionTubers.map(row => `
-                <tr class="hover:bg-slate-800/40"><td class="px-4 py-2.5">${row[0]}</td><td class="px-4 py-2.5 font-semibold text-emerald-400">${row[1]}</td></tr>
+                <tr class="hover:bg-slate-800/40"><td class="px-3 sm:px-4 py-2.5">${row[0]}</td><td class="px-3 sm:px-4 py-2.5 font-semibold text-emerald-400">${row[1]}</td></tr>
             `).join('');
 
             document.getElementById('table-fruits').innerHTML = substitutionFruitsBase.map(row => `
-                <tr class="hover:bg-slate-800/40"><td class="px-4 py-2.5">${row[0]}</td><td class="px-4 py-2.5 font-semibold text-emerald-400">${row[1]}g</td></tr>
+                <tr class="hover:bg-slate-800/40"><td class="px-3 sm:px-4 py-2.5">${row[0]}</td><td class="px-3 sm:px-4 py-2.5 font-semibold text-emerald-400">${row[1]}g</td></tr>
             `).join('');
 
             document.getElementById('table-juices').innerHTML = substitutionJuices.map(row => `
-                <tr class="hover:bg-slate-800/40"><td class="px-4 py-2.5">${row[0]}</td><td class="px-4 py-2.5 font-semibold text-emerald-400">${row[1]}</td></tr>
+                <tr class="hover:bg-slate-800/40"><td class="px-3 sm:px-4 py-2.5">${row[0]}</td><td class="px-3 sm:px-4 py-2.5 font-semibold text-emerald-400">${row[1]}</td></tr>
             `).join('');
         }
 
@@ -863,13 +868,13 @@
         function switchTab(tabName) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
             document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.className = "tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white";
+                btn.className = "tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center space-x-2 whitespace-nowrap bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white";
             });
 
             document.getElementById(`tab-${tabName}`).classList.remove('hidden');
             const activeBtn = document.getElementById(`btn-${tabName}`);
             if (activeBtn) {
-                activeBtn.className = "tab-btn px-4 py-2 rounded-xl text-sm font-semibold transition-all flex items-center space-x-2 whitespace-nowrap bg-emerald-600 text-white shadow-lg shadow-emerald-900/40";
+                activeBtn.className = "tab-btn px-4 py-2.5 rounded-xl text-xs sm:text-sm font-semibold transition-all flex items-center space-x-2 whitespace-nowrap bg-emerald-600 text-white shadow-lg shadow-emerald-900/40";
             }
             
             window.scrollTo({ top: 0, behavior: 'smooth' });
